@@ -1,6 +1,6 @@
 " My vimrc for Mac/Linux/Windows * GUI/Console
 " Author: Francis Niu
-" Last Change: 2016-08-31 22:33:55
+" Last Change: 2016-08-31 23:19:13
 
 " Global variables {{{
 if has('win32') || has('win64')
@@ -51,6 +51,7 @@ set nowrap
 set textwidth=0
 set autoindent
 set smartindent
+set cindent
 set shiftround
 set shiftwidth=4
 set tabstop=4
