@@ -1,6 +1,6 @@
 " My vimrc for Mac/Linux/Windows * GUI/Console
 " Author: Francis Niu
-" Last Change: 2016-08-31 22:10:55
+" Last Change: 2016-08-31 22:33:55
 
 " Global variables {{{
 if has('win32') || has('win64')
@@ -235,6 +235,7 @@ au BufNewFile,BufRead *.md setl filetype=markdown
 au FileType vim,perl,sh,cs setl noic
 au FileType python setl noic cc=80,100 fdm=indent
 au FileType sql setl noet nosi ar
+au FileType yaml setl et ts=2 sw=2
 au BufNewFile,BufRead *.json setl et ts=2 sw=2
 au BufWritePre,FileWritePre *.cmd,*.bat,*.sql,*.tab if &bomb == 0 | setl fenc=cp936 ff=dos | endif
 " timestamp
