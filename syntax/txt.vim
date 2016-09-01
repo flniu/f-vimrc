@@ -1,7 +1,7 @@
 " Plain text syntax file
 " Language: text/plain :)
 " Author: Francis Niu (https://github.com/flniu)
-" Last Change: 2016-09-01 08:48:07
+" Last Change: 2016-09-01 13:43:36
 
 scriptencoding utf-8
 

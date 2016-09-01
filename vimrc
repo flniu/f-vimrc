@@ -1,6 +1,6 @@
 " My vimrc for Mac/Linux/Windows * GUI/Console
 " Author: Francis Niu (https://github.com/flniu)
-" Last Change: 2016-09-01 08:25:45
+" Last Change: 2016-09-01 13:17:06
 
 " Global variables {{{
 if has('win32') || has('win64')
@@ -88,7 +88,7 @@ set nobackup
 "set autoread
 set autowrite
 if has('persistent_undo')
-  set undodir=$TEMP,.
+  set undodir=$TMP,$HOME/tmp,.
   set undofile
 endif
 
@@ -142,7 +142,9 @@ if has('gui_running')
   endfunction "}}}
   call SetFontSize('0')
 elseif &term == 'xterm'
-  colorscheme desert256
+  if filereadable($VIMFILES . '/colors/desert256.vim')
+    colorscheme desert256
+  endif
   set t_Co=256
 endif
 "}}}
