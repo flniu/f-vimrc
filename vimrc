@@ -1,6 +1,6 @@
 " My vimrc for Mac/Linux/Windows * GUI/Console
-" Author: Francis Niu
-" Last Change: 2016-08-31 23:19:13
+" Author: Francis Niu (https://github.com/flniu)
+" Last Change: 2016-09-01 08:25:45
 
 " Global variables {{{
 if has('win32') || has('win64')
