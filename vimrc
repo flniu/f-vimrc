@@ -1,6 +1,6 @@
 " My vimrc for Mac/Linux/Windows * GUI/Console
 " Author: Francis Niu (https://github.com/flniu)
-" Last Change: 2016-09-02 15:32:45
+" Last Change: 2016-09-03 00:21:10
 
 " Global variables {{{
 if has('win32') || has('win64')
@@ -17,8 +17,8 @@ let $TEMPLATE = g:my_vimfiles . '/template'
 " General settings {{{
 set nocompatible
 map Q :qa<CR>
-if filereadable($VIMFILES . '/autoload/pathogen.vim')
-  execute pathogen#infect()
+if filereadable($VIMFILES . '/config-plugin.vim')
+  source $VIMFILES/config-plugin.vim
 endif
 filetype plugin indent on
 syntax on
@@ -113,8 +113,8 @@ if has('gui_running')
   nmap <silent> <F6> :if &go =~# 'l' <Bar> set go-=l <Bar> else <Bar> set go+=l <Bar> endif<CR>
   nmap <silent> <F7> :if &go =~# 'b' <Bar> set go-=b <Bar> else <Bar> set go+=b <Bar> endif<CR>
   nmap <silent> <F8> :if &go =~# 'r' <Bar> set go-=r <Bar> else <Bar> set go+=r <Bar> endif<CR>
-  source $VIMRUNTIME\delmenu.vim
-  source $VIMRUNTIME\menu.vim
+  source $VIMRUNTIME/delmenu.vim
+  source $VIMRUNTIME/menu.vim
   set lines=40 columns=120
   nmap <C-\> :call ToggleFullScreen()<CR>
   function! ToggleFullScreen() "{{{
@@ -242,6 +242,7 @@ au FileType sql setl noet nosi ar
 au FileType yaml setl et ts=2 sw=2
 au BufNewFile,BufRead *.json setl et ts=2 sw=2
 au BufWritePre,FileWritePre *.cmd,*.bat,*.sql,*.tab if &bomb == 0 | setl fenc=cp936 ff=dos | endif
+au BufNewFile *.vim setl ff=unix
 " timestamp
 au BufWritePre,FileWritePre *vimrc,*.vim,*.ahk call SetTimeStamp()
 function! SetTimeStamp() "{{{
