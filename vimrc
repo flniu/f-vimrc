@@ -1,6 +1,6 @@
 " My vimrc for Mac/Linux/Windows * GUI/Console
 " Author: Francis Niu (https://github.com/flniu)
-" Last Change: 2016-09-01 13:17:06
+" Last Change: 2016-09-02 15:32:45
 
 " Global variables {{{
 if has('win32') || has('win64')
@@ -63,7 +63,7 @@ set shortmess=atI
 set number
 set statusline=%f\ %m%r[%{strftime('%Y%m%d',getftime(expand('%')))}]%=%{GetFileEditSetting()}\ %-21(%11(%l/%L%),%-3v\ %P%)
 function! GetFileEditSetting() "{{{
-  let misc = (&ar ? 'ar' : '')
+  let misc = (&ar ? 'ar,' : '') . (&paste ? 'p,' : '')
   let fencstr = (&fenc == '' ? &enc : &fenc) . (&bomb ? '.BOM' : '')
   let ftstr = (&ft == '' ? '-' : &ft)
   let textmode = (&et ? '-' : '|') . &ts .
@@ -168,6 +168,7 @@ nmap <Leader>dt :diffthis<CR>
 nmap <Leader>du :diffupdate<CR>
 nmap <Leader>tn :tabnew<CR>
 nmap <Leader>ar :set autoread!<CR>
+nmap <Leader>pa :set paste!<CR>
 nmap <Leader>et :setl et!<CR>
 nmap <Leader>li :setl list!<CR>
 nmap <Leader>sp :setl spell!<CR>
