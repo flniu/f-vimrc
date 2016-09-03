@@ -1,6 +1,6 @@
 " My vimrc for Mac/Linux/Windows * GUI/Console
 " Author: Francis Niu (https://github.com/flniu)
-" Last Change: 2016-09-03 00:21:10
+" Last Change: 2016-09-03
 
 " Global variables {{{
 if has('win32') || has('win64')
@@ -16,7 +16,6 @@ let $TEMPLATE = g:my_vimfiles . '/template'
 
 " General settings {{{
 set nocompatible
-map Q :qa<CR>
 if filereadable($VIMFILES . '/config-plugin.vim')
   source $VIMFILES/config-plugin.vim
 endif
@@ -25,6 +24,8 @@ syntax on
 if has('mouse')
   set mouse=a
 endif
+" Use Q to quit and disable Ex-mode
+map Q :qa<CR>
 
 " Language
 if g:my_os == 'Windows'
@@ -224,32 +225,19 @@ command! -range=% FormatJSON <line1>,<line2>!python -m json.tool
 
 " Autocmds {{{
 " last-position-jump
-au BufReadPost *.txt if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 " filetype settings
 au BufNewFile,BufRead *.txt setl filetype=txt wrap fdm=marker cms=
-au BufNewFile,BufRead *.py2,*.pyw2 setl filetype=python
-au BufNewFile,BufRead *.cue setl filetype=cue et ts=2 sw=2
-au BufNewFile,BufRead *.cmd,*.sh,*.vim setl et ts=2 sw=2
-au BufNewFile,BufRead *.dtsConfig,*.rdl setl et ts=2 sw=2
-au BufNewFile,BufRead *.xml,*web.config setl noet
-au BufNewFile,BufRead *.ctl setl filetype=conf
-au BufNewFile,BufRead *.cwiki setl filetype=confluencewiki
-au BufNewFile,BufRead *.sgf setl filetype=sgf
 au BufNewFile,BufRead *.md setl filetype=markdown
-au FileType vim,perl,sh,cs setl noic
-au FileType python setl noic cc=80,100 fdm=indent
-au FileType sql setl noet nosi ar
-au FileType yaml setl et ts=2 sw=2
-au BufNewFile,BufRead *.json setl et ts=2 sw=2
-au BufWritePre,FileWritePre *.cmd,*.bat,*.sql,*.tab if &bomb == 0 | setl fenc=cp936 ff=dos | endif
 au BufNewFile *.vim setl ff=unix
+au FileType snippets setl noet ts=4 sw=4 fdm=indent noml
 " timestamp
 au BufWritePre,FileWritePre *vimrc,*.vim,*.ahk call SetTimeStamp()
 function! SetTimeStamp() "{{{
   if line('$') > 10
-    1,10s/Last Change:\s.*$/\=strftime("Last Change: %Y-%m-%d %H:%M:%S")/ge
+    1,10s/Last Change:\s.*$/\=strftime("Last Change: %Y-%m-%d")/ge
   else
-    %s/Last Change:\s.*$/\=strftime("Last Change: %Y-%m-%d %H:%M:%S")/ge
+    %s/Last Change:\s.*$/\=strftime("Last Change: %Y-%m-%d")/ge
   endif
 endfunction "}}}
 "}}}

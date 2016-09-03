@@ -1,4 +1,8 @@
-snippet header my Vim script file header
+snippet header my Vim script header
 	" ${1:`expand('%:t')`}
 	" Author: ${2:`g:snips_author`}
-	${0:" Last Change: `strftime("%Y-%m-%d %H:%M:%S")`}
+	${0:" Last Change: `strftime("%Y-%m-%d")`}
+snippet footer my Vim script footer
+	" vim:et:ts=2:sw=2:fdm=marker:
+snippet plug vim-plug plugin definition
+	Plug '${0}'
