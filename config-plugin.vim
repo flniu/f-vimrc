@@ -1,6 +1,6 @@
 " Configuration for plugins
 " Author: Francis Niu (https://github.com/flniu)
-" Last Change: 2016-09-03 12:20:45
+" Last Change: 2016-09-03 14:53:14
 
 " pathogen {{{
 if filereadable($VIMFILES . '/autoload/pathogen.vim')
@@ -42,20 +42,23 @@ if filereadable($VIMFILES . '/autoload/plug.vim')
   " surround, quoting/parenthesizing
   Plug 'tpope/vim-surround'
 
+  " EasyMotion, move cursor more easily
+  Plug 'easymotion/vim-easymotion'
+
+  " Tabular, text alignment
+  Plug 'godlygeek/tabular'
+
   call plug#end()
 endif
 "}}}
 
-" Plugin variables {{{
+" Plugin variables & key-mappings {{{
 " TOhtml
 let g:html_ignore_folding = 1
 let g:html_use_css = 1
 let g:use_xhtml = 1
 " SnipMate
 let g:snips_author = 'Francis Niu (https://github.com/flniu)'
-"}}}
-
-" Plugin key-mappings {{{
 " NerdTree
 nmap <F9> :NERDTreeToggle<CR>
 " Tagbar
