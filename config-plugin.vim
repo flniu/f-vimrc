@@ -1,6 +1,6 @@
 " Configuration for plugins
 " Author: Francis Niu (https://github.com/flniu)
-" Last Change: 2016-09-03 15:18:30
+" Last Change: 2016-09-03
 
 " pathogen {{{
 if filereadable($VIMFILES . '/autoload/pathogen.vim')
@@ -53,6 +53,9 @@ if filereadable($VIMFILES . '/autoload/plug.vim')
 
   " VisIncr, produce increasing/decreasing columns of numbers, dates, or daynames
   Plug 'vim-scripts/VisIncr'
+
+  " CmdlineComplete, complete command-line from current file
+  Plug 'vim-scripts/CmdlineComplete'
 
   call plug#end()
 endif
