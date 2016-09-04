@@ -89,7 +89,11 @@ set nobackup
 "set autoread
 set autowrite
 if has('persistent_undo')
-  set undodir=$TMP,$HOME/tmp,.
+  let $VIMUNDODIR = $HOME . '/.vimundodir'
+  if exists('*mkdir') && !isdirectory($VIMUNDODIR)
+    call mkdir($VIMUNDODIR, 'p', 0700)
+  endif
+  set undodir=$VIMUNDODIR,$TMP,$HOME/tmp,.
   set undofile
 endif
 
