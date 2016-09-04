@@ -1,6 +1,6 @@
-" Configuration for plugins
+" Plugin configuration, sourced by vimrc
 " Author: Francis Niu (https://github.com/flniu)
-" Last Change: 2016-09-03
+" Last Change: 2016-09-04
 
 " pathogen {{{
 if filereadable($VIMFILES . '/autoload/pathogen.vim')
@@ -11,8 +11,7 @@ endif
 " vim-plug {{{
 if filereadable($VIMFILES . '/autoload/plug.vim')
   call plug#begin()
-
-  " vim-snippets, depends on ultisnips or vim-snipmate
+  " vim-snippets, depends on ultisnips or vim-snipmate {{{
   if has('python') || has('python3')
     Plug 'SirVer/ultisnips'
   else
@@ -21,42 +20,39 @@ if filereadable($VIMFILES . '/autoload/plug.vim')
     Plug 'garbas/vim-snipmate'
   endif
   Plug 'honza/vim-snippets'
-
+  "}}}
   " NerdTree, on-demand loading
   Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
   " Tagbar, on-demand loading
-  Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
-
+  if executable('ctags')
+    Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
+  endif
   " CtrlP, fuzzy file finder
   Plug 'kien/ctrlp.vim'
-
+  " MRU, access most recently used files
+  Plug 'yegappan/mru'
   " Emmet, toolkit for web-developers
   Plug 'mattn/emmet-vim'
-
   " Syntastic, syntax checking
   Plug 'scrooloose/syntastic'
-
   " fugitive, git wrapper
   Plug 'tpope/vim-fugitive'
-
   " surround, quoting/parenthesizing
   Plug 'tpope/vim-surround'
-
   " EasyMotion, move cursor more easily
   Plug 'easymotion/vim-easymotion'
-
   " Tabular, text alignment
   Plug 'godlygeek/tabular'
-
   " Mark, highlight multiple words
   Plug 'tracyone/mark.vim'
-
   " VisIncr, produce increasing/decreasing columns of numbers, dates, or daynames
   Plug 'vim-scripts/VisIncr'
-
   " CmdlineComplete, complete command-line from current file
   Plug 'vim-scripts/CmdlineComplete'
-
+  " Syntax and settings for plain text
+  Plug 'flniu/txt.vim'
+  " Syntax for Confluence wiki
+  Plug 'flniu/confluencewiki.vim'
   call plug#end()
 endif
 "}}}
@@ -69,9 +65,13 @@ let g:use_xhtml = 1
 " SnipMate
 let g:snips_author = 'Francis Niu (https://github.com/flniu)'
 " NerdTree
-nmap <F9> :NERDTreeToggle<CR>
+if exists(':NERDTreeToggle') == 2
+  nmap <F11> :NERDTreeToggle<CR>
+endif
 " Tagbar
-nmap <F10> :TagbarToggle<CR>
+if exists(':TagbarToggle') == 2
+  nmap <F12> :TagbarToggle<CR>
+endif
 "}}}
 
 " vim:et:ts=2:sw=2:fdm=marker:

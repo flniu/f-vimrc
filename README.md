@@ -60,15 +60,17 @@ If you have any question or advice, create an [issue](https://github.com/flniu/f
 
 There are 3 methods to manage plugins in **f-vimrc**:
 * Vim traditional method:
-  Folders `colors`, `plugin`, `syntax` include several stable scripts and they are portable without Git or Internet access. I call them **build-in plugins**. Only slow-changing and necessary scripts will be added here.
+  Folders `autoload`, `colors`, `plugin` include several stable scripts and they are portable without Git or Internet access. I call them **build-in plugins**. Only core scripts will be added here.
 * [pathogen](https://github.com/tpope/vim-pathogen):
   With this practical runtime-path manager, you can download or clone or create plugins in default `bundle` folder. It's easy to try some plugins without messing your runtime-path or changing your configuration file.
 * [vim-plug](https://github.com/junegunn/vim-plug):
   With this powerful and minimalist plugin manager, managing your must-have plugins will be simple and effective. Plugins managed by **vim-plug** will be put in default `plugged` folder.
 
-My personal habit is: Try new plugin with **pathogen**; If it is what I need, then copy the plugin folder from `bundle` to `plugged` and add it in **vim-plug** section.
+My personal habit:
+* Try new plugin with **pathogen**;
+* If it is what I need and I want to make it under version control and portable, then copy the plugin folder from `bundle` to `plugged` and add it in **vim-plug** section. (I would not use `git submodule` because it's inconvenient in contrast to **vim-plug**.)
 
-You can choose either of them and change the settings in `config-plugin.vim`.
+You can choose either of them and change the settings in `vimrc.plugin`.
 
 Check **pathogen** and **vim-plug** pages for detailed introduction.
 
@@ -82,7 +84,7 @@ Check **pathogen** and **vim-plug** pages for detailed introduction.
 
 * Customize snippets in `snippets` folder.
 * Create templates in `template` folder.
-* Historical tip: `rc` suffix of dot files has a long history and has formed several similar meanings; I choose "Vim runtime configuration" to stand for "vimrc". Read this post [What does "rc" mean in dot files](http://stackoverflow.com/questions/11030552/what-does-rc-mean-in-dot-files) if you have interest.
+* Historical tip: `rc` suffix of dot files has a long history and has formed several different meanings; I choose "Vim runtime configuration" to stand for "vimrc". Read this post [What does "rc" mean in dot files](http://stackoverflow.com/questions/11030552/what-does-rc-mean-in-dot-files) if you have interest.
 
 ## License
 

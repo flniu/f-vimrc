@@ -1,10 +1,15 @@
-" Configuration for Windows
+" MS-Windows configuration
 " Author: Francis Niu
-" Last Change: 2016-08-31 22:11:08
+" Last Change: 2016-09-04
 
 if g:my_os != 'Windows'
   finish
 endif
+
+if exists('did_windows_vim') || &cp || version < 700
+  finish
+endif
+let did_windows_vim = 1
 
 behave mswin
 
