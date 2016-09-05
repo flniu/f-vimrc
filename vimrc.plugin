@@ -1,6 +1,6 @@
 " Plugin configuration, sourced by vimrc
 " Author: Francis Niu (https://github.com/flniu)
-" Last Change: 2016-09-04
+" Last Change: 2016-09-05
 
 " pathogen {{{
 if filereadable($VIMFILES . '/autoload/pathogen.vim')
@@ -41,6 +41,8 @@ if filereadable($VIMFILES . '/autoload/plug.vim')
   Plug 'tpope/vim-surround'
   " EasyMotion, move cursor more easily
   Plug 'easymotion/vim-easymotion'
+  " ChooseWin, jump windows more easily
+  Plug 't9md/vim-choosewin'
   " Tabular, text alignment
   Plug 'godlygeek/tabular'
   " Mark, highlight multiple words
@@ -72,6 +74,8 @@ endif
 if exists(':TagbarToggle') == 2
   nmap <F12> :TagbarToggle<CR>
 endif
+" ChooseWin
+nmap - <Plug>(choosewin)
 "}}}
 
 " vim:et:ts=2:sw=2:fdm=marker:
