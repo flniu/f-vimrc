@@ -153,7 +153,7 @@ endif
 " Make j/k behave like gj/gk but 1j/1k behave as normal
 noremap <expr> j (v:count == 0 ? 'gj' : 'j')
 noremap <expr> k (v:count == 0 ? 'gk' : 'k')
-" Yank line without line-ending
+" Yank from cursor to end of line
 noremap gY y$
 " Double ESC to stop highlighting
 nmap <ESC><ESC> :noh<CR>
@@ -223,6 +223,9 @@ nmap <Leader>fu :set ff=unix<CR>
 nmap <Leader>fm :set ff=mac<CR>
 " Search visual selected text
 vmap <silent> // y/<C-R>=substitute(escape(@",'\\/.*^$~[]'),'\n','\\n','g')<CR><CR>
+" Insert content of default register
+imap <Insert> <C-R>"
+cmap <Insert> <C-R>"
 "}}}
 
 " Commands {{{
