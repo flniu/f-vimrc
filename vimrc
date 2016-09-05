@@ -154,7 +154,7 @@ endif
 noremap <expr> j (v:count == 0 ? 'gj' : 'j')
 noremap <expr> k (v:count == 0 ? 'gk' : 'k')
 " Yank line without line-ending
-noremap Y y$
+noremap gY y$
 " Double ESC to stop highlighting
 nmap <ESC><ESC> :noh<CR>
 " Jump diffs
@@ -170,8 +170,11 @@ nmap <C-S-Tab> gT
 nmap <F2> :bp<CR>
 nmap <F3> :bn<CR>
 nmap <F4> :ls<CR>
-" Shortcut keys, press K on each command/option to find its meaning
+" Horizontal & Vertical split
+nmap <Leader>hs :split<CR>
 nmap <Leader>vs :vsplit<CR>
+" Shortcut keys, press K on each command/option to find its meaning
+" if K cannot locate an option, use :h 'option' instead
 nmap <Leader>dt :diffthis<CR>
 nmap <Leader>du :diffupdate<CR>
 nmap <Leader>tn :tabnew<CR>
@@ -207,6 +210,8 @@ nmap <Leader>tt :%s/\%u3000/ /ge <Bar> %s/\s\+$//e <Bar> g/^$/d<CR>
 " Add comma, Add quotation and comma
 nmap <Leader>ac :%s/^.\+$/\0,/e<CR>
 nmap <Leader>qc :%s/^.\+$/'\0',/e<CR>
+vmap <Leader>ac :s/^.\+$/\0,/e<CR>
+vmap <Leader>qc :s/^.\+$/'\0',/e<CR>
 " Change fileencoding, Toggle BOM
 nmap <Leader>eu :set fenc=utf-8<CR>
 nmap <Leader>eg :set fenc=cp936<CR>
