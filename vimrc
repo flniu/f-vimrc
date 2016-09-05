@@ -153,6 +153,8 @@ endif
 " Make j/k behave like gj/gk but 1j/1k behave as normal
 noremap <expr> j (v:count == 0 ? 'gj' : 'j')
 noremap <expr> k (v:count == 0 ? 'gk' : 'k')
+" Yank line without line-ending
+noremap Y y$
 " Double ESC to stop highlighting
 nmap <ESC><ESC> :noh<CR>
 " Jump diffs
