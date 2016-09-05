@@ -1,17 +1,16 @@
 " My vimrc for Mac/Linux/Windows * GUI/Console
 " Author: Francis Niu (https://github.com/flniu)
-" Last Change: 2016-09-04
+" Last Change: 2016-09-05
 
 " Global variables {{{
 if has('win32') || has('win64')
   let g:my_os = 'Windows'
-  let g:my_vimfiles = $HOME . '\vimfiles'
+  let $VIMFILES = $HOME . '\vimfiles'
 else
   let g:my_os = 'Linux'
-  let g:my_vimfiles = $HOME . '/.vim'
+  let $VIMFILES = $HOME . '/.vim'
 endif
-let $VIMFILES = g:my_vimfiles
-let $TEMPLATE = g:my_vimfiles . '/template'
+let $TEMPLATE = $VIMFILES . '/template'
 "}}}
 
 " General settings {{{
@@ -88,13 +87,17 @@ set nobackup
 "set nowritebackup
 "set autoread
 set autowrite
+set viminfo+=n$VIMFILES/.viminfo
 if has('persistent_undo')
-  let $VIMUNDODIR = $HOME . '/.vimundodir'
+  let $VIMUNDODIR = $VIMFILES . '/.undodir'
   if exists('*mkdir') && !isdirectory($VIMUNDODIR)
     call mkdir($VIMUNDODIR, 'p', 0700)
   endif
-  set undodir=$VIMUNDODIR,$TMP,$HOME/tmp,.
+  set undodir=$VIMUNDODIR,$TMP,.
   set undofile
+endif
+if v:version >= 703
+  set cryptmethod=blowfish
 endif
 
 " Encoding & multi-byte support
@@ -102,22 +105,14 @@ set encoding=utf-8
 set fileencodings=ucs-bom,utf-8,chinese,latin1
 set ambiwidth=double
 set formatoptions+=mM
-
-" Compatibility
-if v:version >= 703
-  set cryptmethod=blowfish
-  nmap <Leader>rn :setl rnu!<CR>
-endif
 "}}}
 
 " GUI & Terminal {{{
 if has('gui_running')
   colorscheme desert
   set guioptions=ceg
-  nmap <silent> <F5> :if &go =~# 'm' <Bar> set go-=m <Bar> else <Bar> set go+=m <Bar> endif<CR>
-  nmap <silent> <F6> :if &go =~# 'l' <Bar> set go-=l <Bar> else <Bar> set go+=l <Bar> endif<CR>
-  nmap <silent> <F7> :if &go =~# 'b' <Bar> set go-=b <Bar> else <Bar> set go+=b <Bar> endif<CR>
-  nmap <silent> <F8> :if &go =~# 'r' <Bar> set go-=r <Bar> else <Bar> set go+=r <Bar> endif<CR>
+  " Use <F1> to toggle menu
+  nmap <silent> <F1> :if &go =~# 'm' <Bar> set go-=m <Bar> else <Bar> set go+=m <Bar> endif<CR>
   source $VIMRUNTIME/delmenu.vim
   source $VIMRUNTIME/menu.vim
   set lines=40 columns=120
@@ -180,14 +175,17 @@ nmap <Leader>du :diffupdate<CR>
 nmap <Leader>tn :tabnew<CR>
 nmap <Leader>ar :set autoread!<CR>
 nmap <Leader>pa :set paste!<CR>
-nmap <Leader>et :setl expandtab!<CR>
-nmap <Leader>li :setl list!<CR>
-nmap <Leader>sp :setl spell!<CR>
+nmap <Leader>et :set expandtab!<CR>
+nmap <Leader>li :set list!<CR>
+nmap <Leader>sp :set spell!<CR>
+" Toggle line number & relative line number
+nmap <Leader>nu :set nu!<CR>
+nmap <Leader>rn :set rnu!<CR>
 " Toggle cursor cross(column+line)
-nmap <Leader>cr :setl cuc! cul!<CR>
+nmap <Leader>cr :set cuc! cul!<CR>
 " Toggle textwidth & wrap
 nmap <Leader>tw :let &tw = (&tw > 0 ? 0 : 78)<CR>
-nmap <Leader>wr :setl wrap!<CR>
+nmap <Leader>wr :set wrap!<CR>
 " Toggle hex-editing
 nmap <Leader>xxd :call XxdToggle()<CR>
 function! XxdToggle() "{{{
@@ -208,14 +206,14 @@ nmap <Leader>tt :%s/\%u3000/ /ge <Bar> %s/\s\+$//e <Bar> g/^$/d<CR>
 nmap <Leader>ac :%s/^.\+$/\0,/e<CR>
 nmap <Leader>qc :%s/^.\+$/'\0',/e<CR>
 " Change fileencoding, Toggle BOM
-nmap <Leader>eu :setl fenc=utf-8<CR>
-nmap <Leader>eg :setl fenc=cp936<CR>
-nmap <Leader>el :setl fenc=latin1<CR>
-nmap <Leader>bm :setl bomb!<CR>
+nmap <Leader>eu :set fenc=utf-8<CR>
+nmap <Leader>eg :set fenc=cp936<CR>
+nmap <Leader>el :set fenc=latin1<CR>
+nmap <Leader>bm :set bomb!<CR>
 " Change fileformat
-nmap <Leader>fd :setl ff=dos<CR>
-nmap <Leader>fu :setl ff=unix<CR>
-nmap <Leader>fm :setl ff=mac<CR>
+nmap <Leader>fd :set ff=dos<CR>
+nmap <Leader>fu :set ff=unix<CR>
+nmap <Leader>fm :set ff=mac<CR>
 " Search visual selected text
 vmap <silent> // y/<C-R>=substitute(escape(@",'\\/.*^$~[]'),'\n','\\n','g')<CR><CR>
 "}}}
@@ -227,9 +225,9 @@ command! SOVIMRC so $MYVIMRC
 " cd current path
 command! CDC cd %:p:h
 " Shortcut commands
-command! -nargs=? FT setl ft=<args>
-command! -nargs=1 TS setl ts=<args> sw=<args>
-command! -nargs=1 TSI setl ts=<args> sw=<args> fdm=indent
+command! -nargs=? FT set ft=<args>
+command! -nargs=1 TS set ts=<args> sw=<args>
+command! -nargs=1 TSI set ts=<args> sw=<args> fdm=indent
 " Reverse lines in range
 command! -bar -range=% Reverse <line1>,<line2>g/^/m<line1>-1
 " Group-by lines and count
@@ -249,9 +247,8 @@ command! -range=% FormatJSON <line1>,<line2>!python -m json.tool
 " last-position-jump
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 " filetype settings
-au BufNewFile,BufRead *.md setl filetype=markdown
-au BufNewFile *.vim setl ff=unix
-au FileType snippets setl noet ts=4 sw=4 fdm=indent noml
+au BufNewFile *.vim set ff=unix
+au FileType snippets set noet ts=4 sw=4 fdm=indent noml
 " timestamp
 au BufWritePre,FileWritePre *vimrc*,*.vim,*.ahk call SetTimeStamp()
 function! SetTimeStamp() "{{{
