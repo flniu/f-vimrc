@@ -1,8 +1,8 @@
 " MS-Windows configuration
 " Author: Francis Niu
-" Last Change: 2016-09-04
+" Last Change: 2016-09-13
 
-if g:my_os != 'Windows'
+if exists('g:my_os') && g:my_os != 'Windows'
   finish
 endif
 
@@ -55,6 +55,40 @@ function! MyDiff()
 endfunction
 if &diff && has('gui_running')
   au GUIEnter * simalt ~x
+endif
+"}}}
+
+" GUI settings {{{
+if has('gui_running')
+  set guioptions+=g
+  " Use <F1> to toggle menu
+  nmap <silent> <F1> :if &go =~# 'm' <Bar> set go-=m <Bar> else <Bar> set go+=m <Bar> endif<CR>
+  source $VIMRUNTIME/delmenu.vim
+  source $VIMRUNTIME/menu.vim
+  set lines=40 columns=120
+  nmap <C-\> :call ToggleFullScreen()<CR>
+  function! ToggleFullScreen() "{{{
+    if &lines == 40 && &columns == 120
+      simalt ~x
+    else
+      set lines=40 columns=120
+    endif
+  endfunction "}}}
+  nmap <C-Up> :call SetFontSize('+')<CR>
+  nmap <C-Down> :call SetFontSize('-')<CR>
+  nmap <C-CR> :call SetFontSize('0')<CR>
+  function! SetFontSize(action) "{{{
+    if a:action == '+'
+      let g:my_fontsize += 1
+    elseif a:action == '-'
+      let g:my_fontsize -= 1
+    else
+      let g:my_fontsize = 10 " default font size
+    endif
+    let &gfn = 'Courier_New:h' . g:my_fontsize
+    "let &gfw = 'SimHei:h' . g:my_fontsize
+  endfunction "}}}
+  call SetFontSize('0')
 endif
 "}}}
 

@@ -1,6 +1,6 @@
 " My vimrc for Mac/Linux/Windows * GUI/Console
 " Author: Francis Niu (https://github.com/flniu)
-" Last Change: 2016-09-05
+" Last Change: 2016-09-13
 
 " Global variables {{{
 if has('win32') || has('win64')
@@ -51,7 +51,7 @@ set nowrap
 set textwidth=0
 set autoindent
 set smartindent
-set cindent
+"set cindent
 set shiftround
 set shiftwidth=4
 set tabstop=4
@@ -110,38 +110,8 @@ set formatoptions+=mM
 " GUI & Terminal {{{
 if has('gui_running')
   colorscheme desert
-  set guioptions=ceg
-  " Use <F1> to toggle menu
-  nmap <silent> <F1> :if &go =~# 'm' <Bar> set go-=m <Bar> else <Bar> set go+=m <Bar> endif<CR>
-  source $VIMRUNTIME/delmenu.vim
-  source $VIMRUNTIME/menu.vim
-  set lines=40 columns=120
-  nmap <C-\> :call ToggleFullScreen()<CR>
-  function! ToggleFullScreen() "{{{
-    if &lines == 40 && &columns == 120
-      simalt ~x
-    else
-      set lines=40 columns=120
-    endif
-  endfunction "}}}
-  nmap <C-Up> :call SetFontSize('+')<CR>
-  nmap <C-Down> :call SetFontSize('-')<CR>
-  nmap <C-CR> :call SetFontSize('0')<CR>
-  function! SetFontSize(action) "{{{
-    if a:action == '+'
-      let g:my_fontsize += 1
-    elseif a:action == '-'
-      let g:my_fontsize -= 1
-    else
-      let g:my_fontsize = 10 " default font size
-    endif
-    let fontstr = 'Courier_New:h' . g:my_fontsize
-    exec 'set gfn=' . fontstr
-    "let widefontstr = 'SimHei:h' . g:my_fontsize
-    "exec 'set gfw=' . widefontstr
-  endfunction "}}}
-  call SetFontSize('0')
-elseif &term == 'xterm'
+  set guioptions=ce
+elseif
   if filereadable($VIMFILES . '/colors/desert256.vim')
     colorscheme desert256
   endif
