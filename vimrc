@@ -27,7 +27,7 @@ endif
 map Q :qa<CR>
 
 " Basic editing
-set history=100
+set history=500
 set backspace=indent,eol,start
 set whichwrap+=<,>,[,]
 set incsearch
@@ -37,14 +37,13 @@ set virtualedit=block
 set showcmd
 set showmatch
 set wildmenu
-"set autochdir
+set nrformats-=octal
 
 " Layout & indent
 set nowrap
 set textwidth=0
 set autoindent
 set smartindent
-"set cindent
 set shiftround
 set shiftwidth=4
 set tabstop=4
@@ -231,6 +230,12 @@ function! SetTimeStamp() "{{{
     %s/Last Change:\s.*$/\=strftime("Last Change: %Y-%m-%d")/ge
   endif
 endfunction "}}}
+"}}}
+
+" Platform settings {{{
+if g:my_os == 'Windows' && filereadable($VIMFILES . '/vimrc.windows')
+  source $VIMFILES/vimrc.windows
+endif
 "}}}
 
 " vim:et:ts=2:sw=2:fdm=marker:
