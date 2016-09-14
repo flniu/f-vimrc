@@ -238,4 +238,10 @@ if g:my_os == 'Windows' && filereadable($VIMFILES . '/vimrc.windows')
 endif
 "}}}
 
+" Custom settings {{{
+if filereadable($VIMFILES . '/vimrc.custom')
+  source $VIMFILES/vimrc.custom
+endif
+"}}}
+
 " vim:et:ts=2:sw=2:fdm=marker:
