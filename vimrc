@@ -1,6 +1,6 @@
 " My vimrc for Mac/Linux/Windows * GUI/Console
 " Author: Francis Niu (https://github.com/flniu)
-" Last Change: 2016-09-13
+" Last Change: 2016-09-14
 
 " Global variables {{{
 if has('win32') || has('win64')
@@ -111,7 +111,7 @@ set formatoptions+=mM
 if has('gui_running')
   colorscheme desert
   set guioptions=ce
-elseif
+else
   if filereadable($VIMFILES . '/colors/desert256.vim')
     colorscheme desert256
   endif
