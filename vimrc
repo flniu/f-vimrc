@@ -1,6 +1,6 @@
 " My vimrc for Mac/Linux/Windows * GUI/Console
 " Author: Francis Niu (https://github.com/flniu)
-" Last Change: 2016-09-14
+" Last Change: 2016-09-15
 
 " Global variables {{{
 if has('win32') || has('win64')
@@ -25,13 +25,6 @@ if has('mouse')
 endif
 " Use Q to quit and disable Ex-mode
 map Q :qa<CR>
-
-" Language
-if g:my_os == 'Windows'
-  language C
-else
-  language en_US.UTF-8
-endif
 
 " Basic editing
 set history=100
