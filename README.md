@@ -97,8 +97,8 @@ If you want to add custom settings without changing original **f-vimrc** scripts
 ###### Example of custom/vimrc:
 
 ```vim
-au BufNewFile,BufRead *.cmd,*.bat,*.sh set et ts=2 sw=2
-au BufWritePre,FileWritePre *.cmd,*.bat,*.tab if &bomb == 0 | set fenc=cp936 ff=dos | endif
+au BufNewFile,BufRead *.{cmd,bat} set et ts=2 sw=2
+au BufWritePre,FileWritePre *.{cmd,bat,tab} if &bomb == 0 | set fenc=cp936 ff=dos | endif
 au FileType yaml set et ts=2 sw=2
 ```
 
@@ -108,8 +108,8 @@ au FileType yaml set et ts=2 sw=2
 " vim-plug
 if exists('g:plugs')
   " Omit `call plug#begin()` because it has been called in vimrc.plugin
-  Plug 'lilydjwg/colorizer'
   Plug 'tomasr/molokai'
+  Plug 'flniu/confluencewiki.vim'
   call plug#end()
 endif
 " SnipMate

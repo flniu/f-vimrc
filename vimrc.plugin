@@ -11,16 +11,8 @@ endif
 " vim-plug {{{
 if filereadable($VIMFILES . '/autoload/plug.vim')
   call plug#begin()
-  " vim-snippets, depends on ultisnips or vim-snipmate {{{
-  if has('python') || has('python3')
-    Plug 'SirVer/ultisnips'
-  else
-    Plug 'MarcWeber/vim-addon-mw-utils'
-    Plug 'tomtom/tlib_vim'
-    Plug 'garbas/vim-snipmate'
-  endif
-  Plug 'honza/vim-snippets'
-  "}}}
+
+  " General {{{
   " NerdTree, on-demand loading
   Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
   " Tagbar, on-demand loading
@@ -31,30 +23,47 @@ if filereadable($VIMFILES . '/autoload/plug.vim')
   Plug 'kien/ctrlp.vim'
   " MRU, access most recently used files
   Plug 'yegappan/mru'
-  " Emmet, toolkit for web-developers
-  Plug 'mattn/emmet-vim'
-  " Syntastic, syntax checking
-  Plug 'scrooloose/syntastic'
-  " fugitive, git wrapper
-  Plug 'tpope/vim-fugitive'
-  " surround, quoting/parenthesizing
-  Plug 'tpope/vim-surround'
   " EasyMotion, move cursor more easily
   Plug 'easymotion/vim-easymotion'
   " ChooseWin, jump windows more easily
   Plug 't9md/vim-choosewin'
-  " Tabular, text alignment
-  Plug 'godlygeek/tabular'
   " Mark, highlight multiple words
   Plug 'tracyone/mark.vim'
-  " VisIncr, produce increasing/decreasing columns of numbers, dates, or daynames
-  Plug 'vim-scripts/VisIncr'
   " CmdlineComplete, complete command-line from current file
   Plug 'vim-scripts/CmdlineComplete'
+  "}}}
+
+  " Editing {{{
+  " vim-snippets, depends on ultisnips or vim-snipmate {{{
+  if has('python') || has('python3')
+    Plug 'SirVer/ultisnips'
+  else
+    Plug 'MarcWeber/vim-addon-mw-utils'
+    Plug 'tomtom/tlib_vim'
+    Plug 'garbas/vim-snipmate'
+  endif
+  Plug 'honza/vim-snippets'
+  "}}}
+  " surround, quoting/parenthesizing
+  Plug 'tpope/vim-surround'
+  " Tabular, text alignment
+  Plug 'godlygeek/tabular'
+  "}}}
+
+  " Reading & Writing {{{
   " Syntax and settings for plain text
   Plug 'flniu/txt.vim'
-  " Syntax for Confluence wiki
-  Plug 'flniu/confluencewiki.vim'
+  " Markdown Vim Mode
+  Plug 'plasticboy/vim-markdown'
+  "}}}
+
+  " Web development {{{
+  " Emmet, toolkit for web-developers
+  Plug 'mattn/emmet-vim'
+  " Paint css colors with the real color
+  Plug 'lilydjwg/colorizer'
+  "}}}
+
   call plug#end()
 endif
 "}}}
