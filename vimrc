@@ -218,18 +218,20 @@ command! -range=% FormatJSON <line1>,<line2>!python -m json.tool
 " Autocmds {{{
 " last-position-jump
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+" timestamp
+au BufWritePre,FileWritePre * call SetTimeStamp()
+function! SetTimeStamp() "{{{
+  if line('$') > 10
+    1,10s/Last Change:\s.*$/\=strftime("Last Change: %Y-%m-%d")/e
+  else
+    %s/Last Change:\s.*$/\=strftime("Last Change: %Y-%m-%d")/e
+  endif
+endfunction "}}}
 " filetype settings
 au BufNewFile *.vim set ff=unix
 au FileType snippets set noet ts=4 sw=4 fdm=indent noml
-" timestamp
-au BufWritePre,FileWritePre *vimrc*,*.vim,*.ahk call SetTimeStamp()
-function! SetTimeStamp() "{{{
-  if line('$') > 10
-    1,10s/Last Change:\s.*$/\=strftime("Last Change: %Y-%m-%d")/ge
-  else
-    %s/Last Change:\s.*$/\=strftime("Last Change: %Y-%m-%d")/ge
-  endif
-endfunction "}}}
+au FileType yaml set et ts=2 sw=2
+au FileType markdown set wrap foldlevel=1
 "}}}
 
 " Platform settings {{{
