@@ -83,6 +83,8 @@ if exists(':TagbarToggle') == 2
 endif
 " ChooseWin
 nmap - <Plug>(choosewin)
+" Colorizer
+let g:colorizer_maxlines = 1000
 "}}}
 
 " Custom settings {{{
