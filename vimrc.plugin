@@ -1,6 +1,6 @@
 " Plugin configuration, sourced by vimrc
 " Author: Francis Niu (https://github.com/flniu)
-" Last Change: 2016-09-05
+" Last Change: 2016-09-15
 
 " pathogen {{{
 if filereadable($VIMFILES . '/autoload/pathogen.vim')
@@ -64,8 +64,6 @@ endif
 let g:html_ignore_folding = 1
 let g:html_use_css = 1
 let g:use_xhtml = 1
-" SnipMate
-let g:snips_author = 'Francis Niu (https://github.com/flniu)'
 " NerdTree
 if exists(':NERDTreeToggle') == 2
   nmap <F11> :NERDTreeToggle<CR>
@@ -76,6 +74,12 @@ if exists(':TagbarToggle') == 2
 endif
 " ChooseWin
 nmap - <Plug>(choosewin)
+"}}}
+
+" Custom settings {{{
+if filereadable($VIMFILES . '/vimrc.plugin.custom')
+  source $VIMFILES/vimrc.plugin.custom
+endif
 "}}}
 
 " vim:et:ts=2:sw=2:fdm=marker:
