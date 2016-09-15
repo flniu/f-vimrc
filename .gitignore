@@ -1,4 +1,4 @@
-/bundle
-/plugged
 /.*
-/*.custom
+/bundle
+/custom
+/plugged

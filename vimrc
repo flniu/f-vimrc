@@ -239,8 +239,8 @@ endif
 "}}}
 
 " Custom settings {{{
-if filereadable($VIMFILES . '/vimrc.custom')
-  source $VIMFILES/vimrc.custom
+if filereadable($VIMFILES . '/custom/vimrc')
+  source $VIMFILES/custom/vimrc
 endif
 "}}}
 

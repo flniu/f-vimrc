@@ -4,6 +4,17 @@ A **Minimal & Universal** Vim runtime configuration.
 
 This project is based on my personal vim configuration, so it includes my preferences. You can fork, change, and use it according to your needs.
 
+# Table of Content
+
+* [Goals & Principles](#goals--principles)
+* [Installation](#installation)
+* [Usage](#usage)
+* [Plugin Management](#plugin-management)
+* [Customization](#customization)
+* [Misc](#misc)
+* [Design Discussion](#design-discussion)
+* [License](#license)
+
 ## Goals & Principles
 
 I try to make it minimal and universal:
@@ -39,6 +50,8 @@ git clone --depth=1 https://github.com/flniu/f-vimrc.git vimfiles
 
 If you have installed full repo, execute command `:PlugInstall` in Vim to install default plugins.
 
+Vim earlier than 7.4 may not use the `2nd user vimrc file: "~/.vim/vimrc"`, in that case, you need to create a "~/.vimrc" links to "~/.vim/vimrc". Run `vim --version | grep vimrc` to check it. However, it is advised to use latest Vim on desktop environment.
+
 #### Server
 
 Use single `.vimrc` file on servers:
@@ -60,7 +73,7 @@ If you have any question or advice, create an [issue][new-issue]. I'm glad to he
 
 There are 3 methods to manage plugins in this project:
 * Vim traditional method:
-  Folders `autoload`, `colors`, `plugin` include several stable scripts and they are portable without Git or Internet access. I call them **build-in plugins**. Only core scripts will be added here.
+  Folders `autoload`, `colors` include several stable scripts and they are portable without Git or Internet access. Only core scripts will be added here.
 * [pathogen][]:
   With this practical runtime-path manager, you can download or clone or create plugins in default `bundle` folder. It's easy to try some plugins without messing your runtime-path or changing your configuration file.
 * [vim-plug][]:
@@ -74,11 +87,35 @@ You can choose either of them and change the settings in `vimrc.plugin`.
 
 Check **pathogen** and **vim-plug** pages for detailed introduction.
 
-## TODO/Not-tested
+## Customization
 
-* Vim tiny version and small version. These may be the default vi version on some server systems.
-* Vim on Mac.
-* Neovim.
+If you want to add custom settings without changing original **f-vimrc** scripts:
+* Create folder `custom`.
+* Create files `custom/vimrc` & `custom/vimrc.plugin` and add your custom settings. These two files are sourced automatically.
+* You can also create a git repo for your `custom` folder.
+
+###### Example of custom/vimrc:
+
+```vim
+au BufNewFile,BufRead *.cmd,*.bat,*.sh set et ts=2 sw=2
+au BufWritePre,FileWritePre *.cmd,*.bat,*.tab if &bomb == 0 | set fenc=cp936 ff=dos | endif
+au FileType yaml set et ts=2 sw=2
+```
+
+###### Example of custom/vimrc.plugin:
+
+```vim
+" vim-plug
+if exists('g:plugs')
+  " Omit `call plug#begin()` because it has been called in vimrc.plugin
+  Plug 'lilydjwg/colorizer'
+  Plug 'tomasr/molokai'
+  call plug#end()
+endif
+" SnipMate
+let g:snips_author = 'Francis Niu'
+let g:snips_github = 'https://github.com/flniu'
+```
 
 ## Misc
 

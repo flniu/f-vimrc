@@ -77,8 +77,8 @@ nmap - <Plug>(choosewin)
 "}}}
 
 " Custom settings {{{
-if filereadable($VIMFILES . '/vimrc.plugin.custom')
-  source $VIMFILES/vimrc.plugin.custom
+if filereadable($VIMFILES . '/custom/vimrc.plugin')
+  source $VIMFILES/custom/vimrc.plugin
 endif
 "}}}
 
