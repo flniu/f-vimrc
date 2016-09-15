@@ -4,7 +4,7 @@ A **Minimal & Universal** Vim runtime configuration.
 
 This project is based on my personal vim configuration, so it includes my preferences. You can fork, change, and use it according to your needs.
 
-# Table of Content
+## Table of Content
 
 * [Goals & Principles](#goals--principles)
 * [Installation](#installation)
@@ -48,9 +48,9 @@ cd %USERPROFILE%
 git clone --depth=1 https://github.com/flniu/f-vimrc.git vimfiles
 ```
 
-If you have installed full repo, execute command `:PlugInstall` in Vim to install default plugins.
+If you have installed full repo, execute command `:PlugInstall` in Vim to install default plugins. All default plugins are listed in `vimrc.plugin`.
 
-Vim earlier than 7.4 may not use the `2nd user vimrc file: "~/.vim/vimrc"`, in that case, you need to create a "~/.vimrc" links to "~/.vim/vimrc". Run `vim --version | grep vimrc` to check it. However, it is advised to use latest Vim on desktop environment.
+Vim earlier than 7.4 may not use the 2nd user vimrc file: "~/.vim/vimrc", in that case, you need to create a "~/.vimrc" links to "~/.vim/vimrc". Run `vim --version | grep vimrc` to check it. However, it is advised to use latest Vim on desktop environment.
 
 #### Server
 
@@ -121,9 +121,11 @@ let g:snips_github = 'https://github.com/flniu'
 
 * Customize snippets in `snippets` folder.
 * Create templates in `template` folder.
-* Historical tip: `rc` suffix of dot files has a long history and has formed several different meanings; I choose "Vim runtime configuration" to stand for "vimrc". Read this post [What does "rc" mean in dot files](http://stackoverflow.com/questions/11030552/what-does-rc-mean-in-dot-files) if you have interest.
+* Historical tip: "rc" suffix of dot files has a long history and has formed several different meanings; I choose "Vim runtime configuration" to stand for "vimrc". Read this post [What does "rc" mean in dot files](http://stackoverflow.com/questions/11030552/what-does-rc-mean-in-dot-files) if you have interest.
 
 ## Design Discussion
+
+You can create an [issue][new-issue] or add comments to join discussion.
 
 In following discussion, I use `$VIMFILES` to stand for the first `'runtimepath'`(see `:h vimfiles`). This variable is defined in `vimrc`.
 
@@ -144,15 +146,13 @@ Third-party scripts list:
 * `autoload/plug.vim`
 * `colors/desert256.vim`
 
-You can use following commands to get or update these scripts:
+You can use following commands to get or update these scripts manually:
 
 ```sh
 curl -Lo autoload/pathogen.vim https://github.com/tpope/vim-pathogen/raw/master/autoload/pathogen.vim
 curl -Lo autoload/plug.vim https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 curl -Lo colors/desert256.vim https://github.com/vim-scripts/desert256.vim/raw/master/colors/desert256.vim
 ```
-
-You can add comments or create an [issue][new-issue] to join discussion.
 
 ## License
 
