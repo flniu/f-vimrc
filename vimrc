@@ -1,6 +1,6 @@
 " My vimrc for Mac/Linux/Windows * GUI/Console
 " Author: Francis Niu (https://github.com/flniu)
-" Last Change: 2016-09-15
+" Last Change: 2016-09-16
 
 " Global variables {{{
 if has('win32') || has('win64')
@@ -25,8 +25,9 @@ if has('mouse')
 endif
 " Use Q to quit and disable Ex-mode
 map Q :qa<CR>
+"}}}
 
-" Basic editing
+" Basic editing {{{
 set history=500
 set backspace=indent,eol,start
 set whichwrap+=<,>,[,]
@@ -38,8 +39,9 @@ set showcmd
 set showmatch
 set wildmenu
 set nrformats-=octal
+"}}}
 
-" Layout & indent
+" Layout & indent {{{
 set nowrap
 set textwidth=0
 set autoindent
@@ -49,20 +51,20 @@ set shiftwidth=4
 set tabstop=4
 set expandtab
 set smarttab
+"}}}
 
-" Display
+" Display {{{
 set shortmess=atI
 set number
 set statusline=%f\ %m%r[%{strftime('%Y%m%d',getftime(expand('%')))}]%=%{GetFileEditSetting()}\ %-21(%11(%l/%L%),%-3v\ %P%)
 function! GetFileEditSetting() "{{{
   let misc = (&ar ? 'ar,' : '') . (&paste ? 'p,' : '')
-  let fencstr = (&fenc == '' ? &enc : &fenc) . (&bomb ? '.BOM' : '')
-  let ftstr = (&ft == '' ? '-' : &ft)
-  let textmode = (&et ? '-' : '|') . &ts .
-        \ (&cin ? 'c' : (&si ? 's' : (&ai ? 'a' : 'n'))) . &sw .
+  let fencstr = (!empty(&fenc) ? &fenc : &enc) . (&bomb ? '.BOM' : '')
+  let textmode = (&et ? '-' : '|') . &ts . (&sts ? '.' . &sts : '') .
+        \ (!empty(&inde) ? 'e' : &cin ? 'c' : &si ? 's' : &ai ? 'a' : 'n') . &sw .
         \ (&wrap ? 'z' : '-') . &tw .
         \ (&ic ? (&scs ? 'S' : 'I') : 'C')
-  return misc . '[' . fencstr . ',' . strpart(&ff,0,1) . '][' . ftstr . ',' . textmode . ']'
+  return misc . '[' . fencstr . ',' . strpart(&ff,0,1) . '][' . &ft . ',' . textmode . ']'
 endfunction "}}}
 set laststatus=2
 set lazyredraw
@@ -72,8 +74,9 @@ set scrolloff=5
 if has('folding')
   set foldcolumn=2
 endif
+"}}}
 
-" File
+" File {{{
 set noswapfile
 set nobackup
 "set nowritebackup
@@ -88,11 +91,14 @@ if has('persistent_undo')
   set undodir=$VIMUNDODIR,$TMP,.
   set undofile
 endif
-if v:version >= 703
+if v:version >= 800
+  set cryptmethod=blowfish2
+elseif v:version >= 703
   set cryptmethod=blowfish
 endif
+"}}}
 
-" Encoding & multi-byte support
+" Encoding & multi-byte support {{{
 set encoding=utf-8
 set fileencodings=ucs-bom,utf-8,chinese,latin1
 set ambiwidth=double
@@ -207,7 +213,7 @@ command! -range=% Count <line1>,<line2>sort | <line1>,<line2>s#\(^.\+$\)\(\n^\1$
 " Write temp file, optional file extension name
 command! -nargs=? WT call WriteTempFile(<f-args>)
 function! WriteTempFile(...) "{{{
-  if expand('%') == ''
+  if empty(expand('%'))
     let filename = strftime("%Y%m%d%H%M%S") . '.' . (a:0 >= 1 ? a:1 : 'tmp')
     exe 'write $TMP/' . filename
   endif
