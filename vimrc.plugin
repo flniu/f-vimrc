@@ -1,6 +1,6 @@
 " Plugin configuration, sourced by vimrc
 " Author: Francis Niu (https://github.com/flniu)
-" Last Change: 2016-09-15
+" Last Change: 2016-09-17
 
 " pathogen {{{
 if filereadable($VIMFILES . '/autoload/pathogen.vim')
@@ -13,24 +13,26 @@ if filereadable($VIMFILES . '/autoload/plug.vim')
   call plug#begin()
 
   " General {{{
-  " NerdTree, on-demand loading
+  " NerdTree, folder tree explorer
   Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
-  " Tagbar, on-demand loading
-  if executable('ctags')
-    Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
-  endif
-  " CtrlP, fuzzy file finder
-  Plug 'kien/ctrlp.vim'
+  " Tagbar (require: ctags), displays tags window
+  Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
   " MRU, access most recently used files
   Plug 'yegappan/mru'
+  " CtrlP, fuzzy file finder
+  Plug 'ctrlpvim/ctrlp.vim'
+  " CtrlSF (require: ack), search everywhere
+  Plug 'dyng/ctrlsf.vim'
   " EasyMotion, move cursor more easily
   Plug 'easymotion/vim-easymotion'
   " ChooseWin, jump windows more easily
-  Plug 't9md/vim-choosewin'
+  Plug 't9md/vim-choosewin', { 'on': '<Plug>(choosewin)' }
   " Mark, highlight multiple words
   Plug 'tracyone/mark.vim'
   " CmdlineComplete, complete command-line from current file
-  Plug 'vim-scripts/CmdlineComplete'
+  Plug 'flniu/CmdlineComplete'
+  " AsyncRun, Run Async Shell Commands
+  Plug 'skywind3000/asyncrun.vim', { 'on': 'AsyncRun' }
   "}}}
 
   " Editing {{{
@@ -81,6 +83,9 @@ endif
 if exists(':TagbarToggle') == 2
   nmap <F12> :TagbarToggle<CR>
 endif
+" CtrlSF
+nmap <C-S-F> <Plug>CtrlSFQuickfixPrompt
+vmap <C-S-F> <Plug>CtrlSFQuickfixVwordPath
 " ChooseWin
 nmap - <Plug>(choosewin)
 " Colorizer
