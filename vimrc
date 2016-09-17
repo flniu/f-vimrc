@@ -69,7 +69,7 @@ endfunction "}}}
 set laststatus=2
 set lazyredraw
 set list
-set listchars=tab:\|\ ,trail:-,nbsp:_
+set listchars=tab:\|\ ,trail:-,nbsp:_,precedes:<,extends:>
 set scrolloff=5
 if has('folding')
   set foldcolumn=2
