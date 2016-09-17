@@ -17,6 +17,10 @@ This project is based on my personal vim configuration, so it includes my prefer
 
 ## Goals & Principles
 
+>Perfection is achieved, not when there is nothing more to add, but when there is nothing left to take away.
+>
+>    -- Antoine de Saint-Exupery
+
 I try to make it minimal and universal:
 
 * Keep it simple: only add or change settings when necessary.
@@ -97,9 +101,10 @@ If you want to add custom settings without changing original **f-vimrc** scripts
 ###### Example of custom/vimrc:
 
 ```vim
+au BufNewFile,BufRead *.sgf set filetype=sgf
+au BufNewFile,BufRead *.cue set filetype=cue et ts=2 sw=2
 au BufNewFile,BufRead *.{cmd,bat} set et ts=2 sw=2
 au BufWritePre,FileWritePre *.{cmd,bat,tab} if &bomb == 0 | set fenc=cp936 ff=dos | endif
-au FileType yaml set et ts=2 sw=2
 ```
 
 ###### Example of custom/vimrc.plugin:
@@ -108,7 +113,11 @@ au FileType yaml set et ts=2 sw=2
 " vim-plug
 if exists('g:plugs')
   " Omit `call plug#begin()` because it has been called in vimrc.plugin
+  " Color schemes
+  Plug 'altercation/vim-colors-solarized'
   Plug 'tomasr/molokai'
+  Plug 'blueshirts/darcula'
+  " Syntax for Confluence wiki
   Plug 'flniu/confluencewiki.vim'
   call plug#end()
 endif
