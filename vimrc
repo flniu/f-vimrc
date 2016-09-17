@@ -1,6 +1,6 @@
 " My vimrc for Mac/Linux/Windows * GUI/Console
 " Author: Francis Niu (https://github.com/flniu)
-" Last Change: 2016-09-16
+" Last Change: 2016-09-17
 
 " Global variables {{{
 if has('win32') || has('win64')
@@ -28,7 +28,7 @@ map Q :qa<CR>
 "}}}
 
 " Basic editing {{{
-set history=500
+set history=1000
 set backspace=indent,eol,start
 set whichwrap+=<,>,[,]
 set incsearch
@@ -56,10 +56,10 @@ set smarttab
 " Display {{{
 set shortmess=atI
 set number
-set statusline=%f\ %m%r[%{strftime('%Y%m%d',getftime(expand('%')))}]%=%{GetFileEditSetting()}\ %-21(%11(%l/%L%),%-3v\ %P%)
+set statusline=%f\ %m%r[%{strftime('%Y%m%d',getftime(expand('%')))}]%=%{GetFileEditSetting()}\ %9(%l/%L%),%-3v\ %P
 function! GetFileEditSetting() "{{{
   let misc = (&ar ? 'ar,' : '') . (&paste ? 'p,' : '')
-  let fencstr = (!empty(&fenc) ? &fenc : &enc) . (&bomb ? '.BOM' : '')
+  let fencstr = (empty(&fenc) ? &enc : &fenc) . (&bomb ? '.BOM' : '')
   let textmode = (&et ? '-' : '|') . &ts . (&sts ? '.' . &sts : '') .
         \ (!empty(&inde) ? 'e' : &cin ? 'c' : &si ? 's' : &ai ? 'a' : 'n') . &sw .
         \ (&wrap ? 'z' : '-') . &tw .
