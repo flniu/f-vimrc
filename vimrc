@@ -1,6 +1,6 @@
 " My vimrc for Mac/Linux/Windows * GUI/Console
 " Author: Francis Niu (https://github.com/flniu)
-" Last Change: 2016-09-17
+" Last Change: 2016-09-19
 
 " Global variables {{{
 if has('win32') || has('win64')
@@ -24,7 +24,7 @@ if has('mouse')
   set mouse=a
 endif
 " Use Q to quit and disable Ex-mode
-map Q :qa<CR>
+map Q :q<CR>
 "}}}
 
 " Basic editing {{{
@@ -45,7 +45,7 @@ set nrformats-=octal
 set nowrap
 set textwidth=0
 set autoindent
-set smartindent
+set cindent
 set shiftround
 set shiftwidth=4
 set tabstop=4
@@ -141,6 +141,8 @@ nmap <F4> :ls<CR>
 " Horizontal & Vertical split
 nmap <Leader>hs :split<CR>
 nmap <Leader>vs :vsplit<CR>
+nmap <Leader>hn :new<CR>
+nmap <Leader>vn :vnew<CR>
 " Shortcut keys, press K on each command/option to find its meaning
 " if K cannot locate an option, use :h 'option' instead
 nmap <Leader>dt :diffthis<CR>
