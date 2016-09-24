@@ -1,6 +1,6 @@
 " My vimrc for Mac/Linux/Windows * GUI/Console
 " Author: Francis Niu (https://github.com/flniu)
-" Last Change: 2016-09-19
+" Last Change: 2016-09-25
 
 " Global variables {{{
 if has('win32') || has('win64')
@@ -77,6 +77,7 @@ endif
 "}}}
 
 " File {{{
+set fileformat=unix
 set noswapfile
 set nobackup
 "set nowritebackup
@@ -236,7 +237,6 @@ function! SetTimeStamp() "{{{
   endif
 endfunction "}}}
 " filetype settings
-au BufNewFile *.vim set ff=unix
 au FileType snippets set noet ts=4 sw=4 fdm=indent noml
 au FileType yaml set et ts=2 sw=2
 au FileType markdown set wrap foldlevel=1
