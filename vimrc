@@ -1,6 +1,6 @@
 " My vimrc for Mac/Linux/Windows * GUI/Console
 " Author: Francis Niu (https://github.com/flniu)
-" Last Change: 2016-09-27
+" Last Change: 2016-09-28
 
 " Global variables {{{
 if has('win32') || has('win64')
@@ -77,7 +77,7 @@ endif
 "}}}
 
 " File {{{
-set fileformat=unix
+set fileformats=unix,dos
 set noswapfile
 set nobackup
 "set nowritebackup
