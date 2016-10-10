@@ -7,7 +7,7 @@ if has('win32') || has('win64')
   let g:my_os = 'Windows'
   let g:my_font = 'Consolas'
   let g:my_fontsize_default = 11
-  let g:my_window_size = { 'S': [30, 100], 'L': [40, 120] }
+  let g:my_window_size = { 'S': [32, 108], 'L': [50, 160] }
   let $VIMFILES = $HOME . '\vimfiles'
 else
   if has('mac')
@@ -86,7 +86,7 @@ set list
 set listchars=tab:\|\ ,trail:-,nbsp:_,precedes:<,extends:>
 set scrolloff=5
 if has('folding')
-  set foldcolumn=2
+  set foldcolumn=1
 endif
 "}}}
 
