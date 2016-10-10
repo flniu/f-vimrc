@@ -1,13 +1,17 @@
 " My vimrc for Mac/Linux/Windows * GUI/Console
 " Author: Francis Niu (https://github.com/flniu)
-" Last Change: 2016-09-28
+" Last Change: 2016-10-10
 
 " Global variables {{{
 if has('win32') || has('win64')
   let g:my_os = 'Windows'
   let $VIMFILES = $HOME . '\vimfiles'
 else
-  let g:my_os = 'Linux'
+  if has('mac')
+    let g:my_os = 'Mac'
+  else
+    let g:my_os = 'Linux'
+  endif
   let $VIMFILES = $HOME . '/.vim'
 endif
 let $TEMPLATE = $VIMFILES . '/template'
@@ -23,6 +27,7 @@ syntax on
 if has('mouse')
   set mouse=a
 endif
+set visualbell
 " Use Q to quit and disable Ex-mode
 map Q :q<CR>
 "}}}
@@ -110,6 +115,49 @@ set formatoptions+=mM
 if has('gui_running')
   colorscheme desert
   set guioptions=ce
+  " Font {{{
+  if g:my_os == 'Windows'
+    let g:my_font = 'Consolas'
+  elseif g:my_os == 'Mac'
+    let g:my_font = 'Monaco'
+  else
+    let g:my_font = 'Monaco'
+  endif
+  let g:my_fontsize_default = 11
+  function! SetFontSize(action) "{{{
+    if a:action == '+'
+      let g:my_fontsize += 1
+    elseif a:action == '-'
+      let g:my_fontsize -= 1
+    else
+      let g:my_fontsize = g:my_fontsize_default
+    endif
+    let &gfn = printf('%s:h%d', g:my_font, g:my_fontsize)
+  endfunction "}}}
+  call SetFontSize('0')
+  nmap <C-Up> :call SetFontSize('+')<CR>
+  nmap <C-Down> :call SetFontSize('-')<CR>
+  nmap <C-CR> :call SetFontSize('0')<CR>
+  "}}}
+  " Window size {{{
+  let g:window_size_small = [30, 100]
+  let g:window_size_big = [40, 120]
+  function! ToggleWindowSize() "{{{
+    if &lines == g:window_size_small[0] && &columns == g:window_size_small[1]
+      if g:my_os == 'Windows'
+        simalt ~x
+      else
+        let &lines = g:window_size_big[0]
+        let &columns = g:window_size_big[1]
+      endif
+    else
+      let &lines = g:window_size_small[0]
+      let &columns = g:window_size_small[1]
+    endif
+  endfunction "}}}
+  call ToggleWindowSize()
+  nmap <C-\> :call ToggleWindowSize()<CR>
+  "}}}
 else
   if filereadable($VIMFILES . '/colors/desert256.vim')
     colorscheme desert256
@@ -132,6 +180,11 @@ nmap <A-Down> ]c
 " Scroll screen left/right
 nmap <A-Left> zH
 nmap <A-Right> zL
+" Increase/Decrease indent
+nmap <Tab> >>
+nmap <S-Tab> <<
+vmap <Tab> >gv
+vmap <S-Tab> <gv
 " Jump tabs
 nmap <C-Tab> gt
 nmap <C-S-Tab> gT

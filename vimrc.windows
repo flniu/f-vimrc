@@ -1,6 +1,6 @@
 " MS-Windows configuration, sourced by vimrc
 " Author: Francis Niu
-" Last Change: 2016-09-15
+" Last Change: 2016-10-10
 
 behave mswin
 
@@ -56,30 +56,6 @@ if has('gui_running')
   nmap <silent> <F1> :if &go =~# 'm' <Bar> set go-=m <Bar> else <Bar> set go+=m <Bar> endif<CR>
   source $VIMRUNTIME/delmenu.vim
   source $VIMRUNTIME/menu.vim
-  set lines=40 columns=120
-  nmap <C-\> :call ToggleFullScreen()<CR>
-  function! ToggleFullScreen() "{{{
-    if &lines == 40 && &columns == 120
-      simalt ~x
-    else
-      set lines=40 columns=120
-    endif
-  endfunction "}}}
-  nmap <C-Up> :call SetFontSize('+')<CR>
-  nmap <C-Down> :call SetFontSize('-')<CR>
-  nmap <C-CR> :call SetFontSize('0')<CR>
-  function! SetFontSize(action) "{{{
-    if a:action == '+'
-      let g:my_fontsize += 1
-    elseif a:action == '-'
-      let g:my_fontsize -= 1
-    else
-      let g:my_fontsize = 10 " default font size
-    endif
-    let &gfn = 'Courier_New:h' . g:my_fontsize
-    "let &gfw = 'SimHei:h' . g:my_fontsize
-  endfunction "}}}
-  call SetFontSize('0')
 endif
 "}}}
 
