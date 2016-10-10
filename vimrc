@@ -1,10 +1,13 @@
 " My vimrc for Mac/Linux/Windows * GUI/Console
 " Author: Francis Niu (https://github.com/flniu)
-" Last Change: 2016-10-10
+" Last Change: 2016-10-11
 
 " Global variables {{{
 if has('win32') || has('win64')
   let g:my_os = 'Windows'
+  let g:my_font = 'Consolas'
+  let g:my_fontsize_default = 11
+  let g:my_window_size = { 'S': [30, 100], 'L': [40, 120] }
   let $VIMFILES = $HOME . '\vimfiles'
 else
   if has('mac')
@@ -12,7 +15,13 @@ else
   else
     let g:my_os = 'Linux'
   endif
+  let g:my_font = 'Monaco'
+  let g:my_fontsize_default = 12
+  let g:my_window_size = { 'S': [40, 120], 'L': [50, 160] }
   let $VIMFILES = $HOME . '/.vim'
+  if !exists($TMP)
+    let $TMP = $HOME . '/.tmp'
+  endif
 endif
 let $TEMPLATE = $VIMFILES . '/template'
 "}}}
@@ -91,7 +100,7 @@ set autowrite
 set viminfo+=n$VIMFILES/.viminfo
 if has('persistent_undo')
   let $VIMUNDODIR = $VIMFILES . '/.undodir'
-  if exists('*mkdir') && !isdirectory($VIMUNDODIR)
+  if !isdirectory($VIMUNDODIR) && exists('*mkdir')
     call mkdir($VIMUNDODIR, 'p', 0700)
   endif
   set undodir=$VIMUNDODIR,$TMP,.
@@ -115,15 +124,7 @@ set formatoptions+=mM
 if has('gui_running')
   colorscheme desert
   set guioptions=ce
-  " Font {{{
-  if g:my_os == 'Windows'
-    let g:my_font = 'Consolas'
-  elseif g:my_os == 'Mac'
-    let g:my_font = 'Monaco'
-  else
-    let g:my_font = 'Monaco'
-  endif
-  let g:my_fontsize_default = 11
+  " Font & Window size {{{
   function! SetFontSize(action) "{{{
     if a:action == '+'
       let g:my_fontsize += 1
@@ -135,28 +136,20 @@ if has('gui_running')
     let &gfn = printf('%s:h%d', g:my_font, g:my_fontsize)
   endfunction "}}}
   call SetFontSize('0')
-  nmap <C-Up> :call SetFontSize('+')<CR>
-  nmap <C-Down> :call SetFontSize('-')<CR>
-  nmap <C-CR> :call SetFontSize('0')<CR>
-  "}}}
-  " Window size {{{
-  let g:window_size_small = [30, 100]
-  let g:window_size_big = [40, 120]
-  function! ToggleWindowSize() "{{{
-    if &lines == g:window_size_small[0] && &columns == g:window_size_small[1]
-      if g:my_os == 'Windows'
-        simalt ~x
-      else
-        let &lines = g:window_size_big[0]
-        let &columns = g:window_size_big[1]
-      endif
+  function! SetWindowSize(level) "{{{
+    if g:my_os == 'Windows' && a:level == 'L'
+      simalt ~x
     else
-      let &lines = g:window_size_small[0]
-      let &columns = g:window_size_small[1]
+      let &lines = g:my_window_size[a:level][0]
+      let &columns = g:my_window_size[a:level][1]
     endif
   endfunction "}}}
-  call ToggleWindowSize()
-  nmap <C-\> :call ToggleWindowSize()<CR>
+  call SetWindowSize('S')
+  nmap <C-CR> :call SetFontSize('0')<CR>
+  nmap <C-Up> :call SetFontSize('+')<CR>
+  nmap <C-Down> :call SetFontSize('-')<CR>
+  nmap <C-Left> :call SetWindowSize('S')<CR>
+  nmap <C-Right> :call SetWindowSize('L')<CR>
   "}}}
 else
   if filereadable($VIMFILES . '/colors/desert256.vim')
@@ -175,8 +168,8 @@ noremap gY y$
 " Double ESC to stop highlighting
 nmap <ESC><ESC> :noh<CR>
 " Jump diffs
-nmap <A-Up> [c
-nmap <A-Down> ]c
+nmap <S-F7> [c
+nmap <F7> ]c
 " Scroll screen left/right
 nmap <A-Left> zH
 nmap <A-Right> zL
@@ -298,8 +291,14 @@ au FileType markdown set wrap foldlevel=1
 "}}}
 
 " Platform settings {{{
-if g:my_os == 'Windows' && filereadable($VIMFILES . '/vimrc.windows')
-  source $VIMFILES/vimrc.windows
+if g:my_os == 'Windows'
+  if filereadable($VIMFILES . '/vimrc.windows')
+    source $VIMFILES/vimrc.windows
+  endif
+elseif g:my_os == 'Mac'
+  if filereadable($VIMFILES . '/vimrc.mac')
+    source $VIMFILES/vimrc.mac
+  endif
 endif
 "}}}
 

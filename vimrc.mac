@@ -1,0 +1,17 @@
+" Mac configuration, sourced by vimrc
+" Author: Francis Niu (https://github.com/flniu)
+" Last Change: 2016-10-11
+
+" GUI settings
+if has('gui_running')
+  nmap <A-D-Up> :call SetFontSize('+')<CR>
+  nmap <A-D-Down> :call SetFontSize('-')<CR>
+  nmap <A-D-Left> :call SetWindowSize('S')<CR>
+  nmap <A-D-Right> :call SetWindowSize('L')<CR>
+endif
+
+" Scroll screen left/right
+nmap <S-Left> zH
+nmap <S-Right> zL
+
+" vim:et:ts=2:sw=2:fdm=marker:ft=vim:
