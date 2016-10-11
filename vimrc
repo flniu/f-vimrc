@@ -152,9 +152,7 @@ if has('gui_running')
   nmap <C-Right> :call SetWindowSize('L')<CR>
   "}}}
 else
-  if filereadable($VIMFILES . '/colors/desert256.vim')
-    colorscheme desert256
-  endif
+  colorscheme desert
   set t_Co=256
 endif
 "}}}
