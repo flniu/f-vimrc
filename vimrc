@@ -1,6 +1,6 @@
 " My vimrc for Mac/Linux/Windows * GUI/Console
 " Author: Francis Niu (https://github.com/flniu)
-" Last Change: 2016-10-11
+" Last Change: 2016-10-23
 
 " Global variables {{{
 if has('win32') || has('win64')
@@ -53,6 +53,7 @@ set showcmd
 set showmatch
 set wildmenu
 set nrformats-=octal
+set iskeyword+=-
 "}}}
 
 " Layout & indent {{{
