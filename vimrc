@@ -1,23 +1,26 @@
 " My vimrc for Mac/Linux/Windows * GUI/Console
 " Author: Francis Niu (https://github.com/flniu)
-" Last Change: 2016-10-23
+" Last Change: 2016-10-29
 
 " Global variables {{{
 if has('win32') || has('win64')
   let g:my_os = 'Windows'
-  let g:my_font = 'Consolas'
+  let g:my_font = 'Consolas:h%d'
   let g:my_fontsize_default = 11
   let g:my_window_size = { 'S': [32, 108], 'L': [50, 160] }
   let $VIMFILES = $HOME . '\vimfiles'
 else
   if has('mac')
     let g:my_os = 'Mac'
+    let g:my_font = 'Monaco:h%d'
+    let g:my_fontsize_default = 12
+    let g:my_window_size = { 'S': [40, 120], 'L': [60, 180] }
   else
     let g:my_os = 'Linux'
+    let g:my_font = 'DejaVu Sans Mono %d'
+    let g:my_fontsize_default = 10
+    let g:my_window_size = { 'S': [40, 120], 'L': [50, 160] }
   endif
-  let g:my_font = 'Monaco'
-  let g:my_fontsize_default = 12
-  let g:my_window_size = { 'S': [40, 120], 'L': [50, 160] }
   let $VIMFILES = $HOME . '/.vim'
   if !exists($TMP)
     let $TMP = $HOME . '/.tmp'
@@ -134,7 +137,7 @@ if has('gui_running')
     else
       let g:my_fontsize = g:my_fontsize_default
     endif
-    let &gfn = printf('%s:h%d', g:my_font, g:my_fontsize)
+    let &gfn = printf(g:my_font, g:my_fontsize)
   endfunction "}}}
   call SetFontSize('0')
   function! SetWindowSize(level) "{{{
