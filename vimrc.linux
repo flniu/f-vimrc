@@ -1,0 +1,20 @@
+" Linux configuration, sourced by vimrc
+" Author: Francis Niu
+" Last Change: 2016-10-29
+
+" Use <C-X><C-C><C-V> to cut/copy/paste {{{
+vnoremap <C-X> "+x
+vnoremap <C-C> "+y
+map <C-V> "+gP
+cmap <C-V> <C-R>+
+exe 'inoremap <script> <C-V>' paste#paste_cmd['i']
+exe 'vnoremap <script> <C-V>' paste#paste_cmd['v']
+noremap <C-Q> <C-V>
+"}}}
+
+" Use <C-S> to save {{{
+nmap <C-S> :update<CR>
+imap <C-S> <C-O>:update<CR>
+"}}}
+
+" vim:et:ts=2:sw=2:fdm=marker:

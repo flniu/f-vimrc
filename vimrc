@@ -301,6 +301,10 @@ elseif g:my_os == 'Mac'
   if filereadable($VIMFILES . '/vimrc.mac')
     source $VIMFILES/vimrc.mac
   endif
+else
+  if filereadable($VIMFILES . '/vimrc.linux')
+    source $VIMFILES/vimrc.linux
+  endif
 endif
 "}}}
 
