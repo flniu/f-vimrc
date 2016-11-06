@@ -1,6 +1,6 @@
 " My vimrc for Mac/Linux/Windows * GUI/Console
 " Author: Francis Niu (https://github.com/flniu)
-" Last Change: 2016-10-29
+" Last Change: 2016-11-06
 
 " Global variables {{{
 if has('win32') || has('win64')
@@ -288,6 +288,7 @@ function! SetTimeStamp() "{{{
 endfunction "}}}
 " filetype settings
 au FileType snippets set noet ts=4 sw=4 fdm=indent noml
+au FileType sh set et ts=2 sw=2
 au FileType yaml set et ts=2 sw=2
 au FileType markdown set wrap foldlevel=1
 "}}}
