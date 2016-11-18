@@ -1,6 +1,6 @@
 " Plugin configuration, sourced by vimrc
 " Author: Francis Niu (https://github.com/flniu)
-" Last Change: 2016-09-19
+" Last Change: 2016-11-18
 
 " pathogen {{{
 if filereadable($VIMFILES . '/autoload/pathogen.vim')
@@ -37,7 +37,7 @@ if filereadable($VIMFILES . '/autoload/plug.vim')
 
   " Editing {{{
   " vim-snippets, depends on ultisnips or vim-snipmate {{{
-  if has('python') || has('python3')
+  if has('python3') || has('python')
     Plug 'SirVer/ultisnips'
   else
     Plug 'MarcWeber/vim-addon-mw-utils'
@@ -50,6 +50,8 @@ if filereadable($VIMFILES . '/autoload/plug.vim')
   Plug 'tpope/vim-surround'
   " Tabular, text alignment
   Plug 'godlygeek/tabular'
+  " NERD Commenter
+  Plug 'scrooloose/nerdcommenter'
   "}}}
 
   " Reading & Writing {{{
