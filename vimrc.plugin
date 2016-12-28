@@ -37,6 +37,8 @@ if filereadable($VIMFILES . '/autoload/plug.vim')
   if g:my_os != 'Windows'
     Plug 'airblade/vim-gitgutter'
   endif
+  " Diff directories
+  Plug 'vim-scripts/DirDiff.vim'
   "}}}
 
   " Editing {{{
