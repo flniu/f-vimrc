@@ -1,6 +1,6 @@
 " Plugin configuration, sourced by vimrc
 " Author: Francis Niu (https://github.com/flniu)
-" Last Change: 2016-11-23
+" Last Change: 2016-12-28
 
 " pathogen {{{
 if filereadable($VIMFILES . '/autoload/pathogen.vim')
@@ -33,6 +33,10 @@ if filereadable($VIMFILES . '/autoload/plug.vim')
   Plug 'flniu/CmdlineComplete'
   " AsyncRun, Run Async Shell Commands
   Plug 'skywind3000/asyncrun.vim', { 'on': 'AsyncRun' }
+  " GitGutter, shows a git diff in the gutter
+  if g:my_os != 'Windows'
+    Plug 'airblade/vim-gitgutter'
+  endif
   "}}}
 
   " Editing {{{
@@ -48,6 +52,8 @@ if filereadable($VIMFILES . '/autoload/plug.vim')
   "}}}
   " surround, quoting/parenthesizing
   Plug 'tpope/vim-surround'
+  " pairs of handy bracket mappings
+  Plug 'tpope/vim-unimpaired'
   " Tabular, text alignment
   Plug 'godlygeek/tabular'
   " NERD Commenter
