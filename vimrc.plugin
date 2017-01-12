@@ -1,6 +1,6 @@
 " Plugin configuration, sourced by vimrc
 " Author: Francis Niu (https://github.com/flniu)
-" Last Change: 2017-01-04
+" Last Change: 2017-01-13
 
 " pathogen {{{
 if filereadable($VIMFILES . '/autoload/pathogen.vim')
@@ -13,6 +13,8 @@ if filereadable($VIMFILES . '/autoload/plug.vim')
   call plug#begin()
 
   " General {{{
+  " Color schemes
+  Plug 'flniu/f-vim-colors'
   " Mini buffer explorer
   Plug 'fholgado/minibufexpl.vim'
   " NerdTree, folder tree explorer
@@ -44,16 +46,15 @@ if filereadable($VIMFILES . '/autoload/plug.vim')
   "}}}
 
   " Editing {{{
-  " vim-snippets, depends on ultisnips or vim-snipmate {{{
-  if has('python3') || has('python')
-    Plug 'SirVer/ultisnips'
-  else
-    Plug 'MarcWeber/vim-addon-mw-utils'
-    Plug 'tomtom/tlib_vim'
-    Plug 'garbas/vim-snipmate'
-  endif
+  " Syntastic, syntax checking
+  Plug 'scrooloose/syntastic'
+  " YouCompleteMe, code completion
+  Plug 'Valloric/YouCompleteMe'
+  " SuperTab, Perform all insert mode completions with Tab
+  Plug 'ervandew/supertab'
+  " vim-snippets, depends on ultisnips
+  Plug 'SirVer/ultisnips'
   Plug 'honza/vim-snippets'
-  "}}}
   " surround, quoting/parenthesizing
   Plug 'tpope/vim-surround'
   " pairs of handy bracket mappings
@@ -62,6 +63,8 @@ if filereadable($VIMFILES . '/autoload/plug.vim')
   Plug 'godlygeek/tabular'
   " NERD Commenter
   Plug 'scrooloose/nerdcommenter'
+  " Expand visual region
+  Plug 'terryma/vim-expand-region'
   "}}}
 
   " Reading & Writing {{{
@@ -83,10 +86,6 @@ endif
 "}}}
 
 " Plugin variables & key-mappings {{{
-" TOhtml
-let g:html_ignore_folding = 1
-let g:html_use_css = 1
-let g:use_xhtml = 1
 " NerdTree
 if exists(':NERDTreeToggle') == 2
   nmap <F9> :NERDTreeToggle<CR>
@@ -101,6 +100,21 @@ nmap <C-S-F> <Plug>CtrlSFQuickfixPrompt
 vmap <C-S-F> <Plug>CtrlSFQuickfixVwordPath
 " ChooseWin
 nmap - <Plug>(choosewin)
+" Syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_python_checkers=['flake8']
+" YouCompleteMe
+let g:ycm_python_binary_path = 'python3'
+" make YCM compatible with UltiSnips (using supertab)
+let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+let g:SuperTabDefaultCompletionType = '<C-n>'
 " Markdown
 let g:vim_markdown_toc_autofit = 1
 let g:vim_markdown_frontmatter = 1
