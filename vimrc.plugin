@@ -1,6 +1,6 @@
 " Plugin configuration, sourced by vimrc
 " Author: Francis Niu (https://github.com/flniu)
-" Last Change: 2017-01-13
+" Last Change: 2017-02-22
 
 " pathogen {{{
 if filereadable($VIMFILES . '/autoload/pathogen.vim')
@@ -55,6 +55,8 @@ if filereadable($VIMFILES . '/autoload/plug.vim')
   " vim-snippets, depends on ultisnips
   Plug 'SirVer/ultisnips'
   Plug 'honza/vim-snippets'
+  " Insert or delete brackets, parens, quotes in pair
+  Plug 'jiangmiao/auto-pairs'
   " surround, quoting/parenthesizing
   Plug 'tpope/vim-surround'
   " pairs of handy bracket mappings
