@@ -1,6 +1,6 @@
 " My vimrc for Mac/Linux/Windows * GUI/Console
 " Author: Francis Niu (https://github.com/flniu)
-" Last Change: 2017-01-02
+" Last Change: 2017-02-26
 
 " Global variables {{{
 if has('win32') || has('win64')
@@ -162,6 +162,7 @@ endif
 "}}}
 
 " Key-mappings {{{
+nmap <Space> :
 " Make j/k behave like gj/gk but 1j/1k behave as normal
 noremap <expr> j (v:count == 0 ? 'gj' : 'j')
 noremap <expr> k (v:count == 0 ? 'gk' : 'k')
