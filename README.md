@@ -126,7 +126,6 @@ let g:snips_github = 'https://github.com/flniu'
 ## Misc
 
 * Customize snippets in `snippets` folder.
-* Create templates in `template` folder.
 * Historical tip: "rc" suffix of dot files has a long history and has formed several different meanings; I choose "Vim runtime configuration" to stand for "vimrc". Read this post [What does "rc" mean in dot files](http://stackoverflow.com/questions/11030552/what-does-rc-mean-in-dot-files) if you have interest.
 
 ## License

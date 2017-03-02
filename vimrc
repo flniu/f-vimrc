@@ -1,6 +1,6 @@
 " My vimrc for Mac/Linux/Windows * GUI/Console
 " Author: Francis Niu (https://github.com/flniu)
-" Last Change: 2017-02-26
+" Last Change: 2017-03-01
 
 " Global variables {{{
 if has('win32') || has('win64')
@@ -26,7 +26,6 @@ else
     let $TMP = $HOME . '/.tmp'
   endif
 endif
-let $TEMPLATE = $VIMFILES . '/template'
 "}}}
 
 " General settings {{{
@@ -148,7 +147,7 @@ if has('gui_running')
       let &columns = g:my_window_size[a:level][1]
     endif
   endfunction "}}}
-  call SetWindowSize('S')
+  call SetWindowSize('L')
   nmap <C-CR> :call SetFontSize('0')<CR>
   nmap <C-Up> :call SetFontSize('+')<CR>
   nmap <C-Down> :call SetFontSize('-')<CR>
