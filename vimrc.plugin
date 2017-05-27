@@ -1,6 +1,6 @@
 " Plugin configuration, sourced by vimrc
 " Author: Francis Niu (https://github.com/flniu)
-" Last Change: 2017-03-22
+" Last Change: 2017-05-23
 
 " pathogen {{{
 if filereadable($VIMFILES . '/autoload/pathogen.vim')
@@ -48,6 +48,8 @@ if filereadable($VIMFILES . '/autoload/plug.vim')
   "}}}
 
   " Editing {{{
+  " EditorConfig
+  Plug 'editorconfig/editorconfig-vim'
   " Syntastic, syntax checking
   Plug 'scrooloose/syntastic'
   " YouCompleteMe, code completion
@@ -75,7 +77,7 @@ if filereadable($VIMFILES . '/autoload/plug.vim')
   " Syntax and settings for plain text
   Plug 'flniu/txt.vim'
   " Markdown Vim Mode
-  Plug 'plasticboy/vim-markdown'
+  Plug 'flniu/vim-markdown'
   "}}}
 
   " Web development {{{
