@@ -1,6 +1,6 @@
 " My vimrc for Mac/Linux/Windows * GUI/Console
 " Author: Francis Niu (https://github.com/flniu)
-" Last Change: 2017-03-01
+" Last Change: 2017-09-08
 
 " Global variables {{{
 if has('win32') || has('win64')
@@ -166,7 +166,8 @@ nmap <Space> :
 noremap <expr> j (v:count == 0 ? 'gj' : 'j')
 noremap <expr> k (v:count == 0 ? 'gk' : 'k')
 " Yank from cursor to end of line
-noremap gY y$
+noremap gy y$
+noremap gc "*y$
 " Double ESC to stop highlighting
 nmap <ESC><ESC> :noh<CR>
 " Jump diffs
