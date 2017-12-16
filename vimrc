@@ -1,6 +1,6 @@
 " My vimrc for Mac/Linux/Windows * GUI/Console
 " Author: Francis Niu (https://github.com/flniu)
-" Last Change: 2017-09-08
+" Last Change: 2017-12-17
 
 " Global variables {{{
 if has('win32') || has('win64')
@@ -158,6 +158,12 @@ else
   colorscheme desert
   set t_Co=256
 endif
+if &term != 'win32'
+  try
+    colors molokai
+  catch
+  endtry
+endif
 "}}}
 
 " Key-mappings {{{
@@ -286,6 +292,16 @@ function! SetTimeStamp() "{{{
     %s/Last Change:\s.*$/\=strftime("Last Change: %Y-%m-%d")/e
   endif
 endfunction "}}}
+" filetype config
+au FileType css,scss,javascript set foldmethod=marker foldmarker={,}
+au FileType snippets set noet ts=4 sw=4 fdm=indent noml
+au FileType yaml set et ts=2 sw=2
+au FileType toml set et ts=2 sw=2
+au FileType markdown set wrap foldlevel=1
+au BufNewFile,BufRead *.sgf set filetype=sgf
+au BufNewFile,BufRead *.cue set filetype=cue et ts=2 sw=2
+au BufNewFile,BufRead *.{cmd,bat} set et ts=2 sw=2
+au BufWritePre,FileWritePre *.{cmd,bat} if &bomb == 0 | set fenc=cp936 ff=dos | endif
 "}}}
 
 " Platform settings {{{
@@ -301,12 +317,6 @@ else
   if filereadable($VIMFILES . '/vimrc.linux')
     source $VIMFILES/vimrc.linux
   endif
-endif
-"}}}
-
-" Custom settings {{{
-if filereadable($VIMFILES . '/custom/vimrc')
-  source $VIMFILES/custom/vimrc
 endif
 "}}}
 

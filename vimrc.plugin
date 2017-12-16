@@ -1,100 +1,109 @@
 " Plugin configuration, sourced by vimrc
 " Author: Francis Niu (https://github.com/flniu)
-" Last Change: 2017-05-23
-
-" pathogen {{{
-if filereadable($VIMFILES . '/autoload/pathogen.vim')
-  execute pathogen#infect()
-endif
-"}}}
+" Last Change: 2017-12-17
 
 " vim-plug {{{
-if filereadable($VIMFILES . '/autoload/plug.vim')
-  call plug#begin()
+call plug#begin()
 
-  " General {{{
-  " Color schemes
-  Plug 'flniu/f-vim-colors'
-  " Mini buffer explorer
-  Plug 'fholgado/minibufexpl.vim'
-  " NerdTree, folder tree explorer
-  Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
-  " Smart buffer closing
-  Plug 'cespare/vim-sbd'
-  " Tagbar (require: ctags), displays tags window
-  Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
-  " MRU, access most recently used files
-  Plug 'yegappan/mru'
-  " CtrlP, fuzzy file finder
-  Plug 'ctrlpvim/ctrlp.vim'
-  " CtrlSF (require: ack), search everywhere
-  Plug 'dyng/ctrlsf.vim'
-  " EasyMotion, move cursor more easily
-  Plug 'easymotion/vim-easymotion'
-  " ChooseWin, jump windows more easily
-  Plug 't9md/vim-choosewin', { 'on': '<Plug>(choosewin)' }
-  " Mark, highlight multiple words
-  Plug 'tracyone/mark.vim'
-  " CmdlineComplete, complete command-line from current file
-  Plug 'flniu/CmdlineComplete'
-  " AsyncRun, Run Async Shell Commands
-  Plug 'skywind3000/asyncrun.vim', { 'on': 'AsyncRun' }
-  " GitGutter, shows a git diff in the gutter
-  if g:my_os != 'Windows'
-    Plug 'airblade/vim-gitgutter'
-  endif
-  " Diff directories
-  Plug 'vim-scripts/DirDiff.vim'
-  "}}}
-
-  " Editing {{{
-  " EditorConfig
-  Plug 'editorconfig/editorconfig-vim'
-  " Syntastic, syntax checking
-  Plug 'scrooloose/syntastic'
-  " YouCompleteMe, code completion
-  Plug 'Valloric/YouCompleteMe'
-  " SuperTab, Perform all insert mode completions with Tab
-  Plug 'ervandew/supertab'
-  " vim-snippets, depends on ultisnips
-  Plug 'SirVer/ultisnips'
-  Plug 'honza/vim-snippets'
-  " Insert or delete brackets, parens, quotes in pair
-  Plug 'jiangmiao/auto-pairs'
-  " surround, quoting/parenthesizing
-  Plug 'tpope/vim-surround'
-  " pairs of handy bracket mappings
-  Plug 'tpope/vim-unimpaired'
-  " Tabular, text alignment
-  Plug 'godlygeek/tabular'
-  " NERD Commenter
-  Plug 'scrooloose/nerdcommenter'
-  " Expand visual region
-  Plug 'terryma/vim-expand-region'
-  "}}}
-
-  " Reading & Writing {{{
-  " Syntax and settings for plain text
-  Plug 'flniu/txt.vim'
-  " Markdown Vim Mode
-  Plug 'flniu/vim-markdown'
-  "}}}
-
-  " Web development {{{
-  " Emmet, toolkit for web-developers
-  Plug 'mattn/emmet-vim'
-  " Paint css colors with the real color
-  Plug 'lilydjwg/colorizer'
-  "}}}
-
-  call plug#end()
+" General {{{
+" Color schemes
+Plug 'flniu/f-vim-colors'
+" Mini buffer explorer
+Plug 'fholgado/minibufexpl.vim'
+let g:miniBufExplHideWhenDiff = 1
+" NerdTree, folder tree explorer
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+" Smart buffer closing
+Plug 'cespare/vim-sbd'
+" Tagbar (require: ctags), displays tags window
+Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
+" MRU, access most recently used files
+Plug 'yegappan/mru'
+" CtrlP, fuzzy file finder
+Plug 'ctrlpvim/ctrlp.vim'
+" CtrlSF (require: ack), search everywhere
+Plug 'dyng/ctrlsf.vim'
+" EasyMotion, move cursor more easily
+Plug 'easymotion/vim-easymotion'
+" ChooseWin, jump windows more easily
+Plug 't9md/vim-choosewin', { 'on': '<Plug>(choosewin)' }
+" Mark, highlight multiple words
+Plug 'tracyone/mark.vim'
+" CmdlineComplete, complete command-line from current file
+Plug 'flniu/CmdlineComplete'
+" AsyncRun, Run Async Shell Commands
+Plug 'skywind3000/asyncrun.vim', { 'on': 'AsyncRun' }
+" GitGutter, shows a git diff in the gutter
+if g:my_os != 'Windows'
+  Plug 'airblade/vim-gitgutter'
 endif
+" Diff directories
+Plug 'vim-scripts/DirDiff.vim'
+"}}}
+
+" Editing {{{
+" EditorConfig
+Plug 'editorconfig/editorconfig-vim'
+" Syntastic, syntax checking
+Plug 'scrooloose/syntastic'
+" YouCompleteMe, code completion
+Plug 'Valloric/YouCompleteMe'
+" SuperTab, Perform all insert mode completions with Tab
+Plug 'ervandew/supertab'
+" vim-snippets, depends on ultisnips
+Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+" Insert or delete brackets, parens, quotes in pair
+Plug 'jiangmiao/auto-pairs'
+" surround, quoting/parenthesizing
+Plug 'tpope/vim-surround'
+" pairs of handy bracket mappings
+Plug 'tpope/vim-unimpaired'
+" Tabular, text alignment
+Plug 'godlygeek/tabular'
+" NERD Commenter
+Plug 'scrooloose/nerdcommenter'
+" Expand visual region
+Plug 'terryma/vim-expand-region'
+"}}}
+
+" Reading & Writing {{{
+" Syntax and settings for plain text
+Plug 'flniu/txt.vim'
+" Markdown Vim Mode
+Plug 'flniu/vim-markdown'
+let g:vim_markdown_toc_autofit = 1
+let g:vim_markdown_frontmatter = 1
+"}}}
+
+" Web development {{{
+" Emmet, toolkit for web-developers
+Plug 'mattn/emmet-vim'
+" Paint css colors with the real color
+Plug 'lilydjwg/colorizer'
+let g:colorizer_maxlines = 1000
+"}}}
+
+" Syntaxs{{{
+" Syntax for Python
+Plug 'hdima/python-syntax'
+let python_highlight_all = 1
+" Syntax for Confluence wiki
+Plug 'flniu/confluencewiki.vim'
+" Syntax for nginx
+Plug 'vim-scripts/nginx.vim'
+" Syntax for TOML
+Plug 'cespare/vim-toml'
+" Syntax for Jinja2
+Plug 'Glench/Vim-Jinja2-Syntax'
+"}}}
+
+call plug#end()
 "}}}
 
 " Plugin variables & key-mappings {{{
 " NerdTree
 if exists(':NERDTreeToggle') == 2
-  nmap <F9> :NERDTreeToggle<CR>
+  nmap <F11> :NERDTreeToggle<CR>
   let NERDTreeIgnore = ['\.pyc$']
 endif
 " Tagbar
@@ -117,22 +126,14 @@ let g:syntastic_check_on_wq = 0
 let g:syntastic_python_checkers = ['flake8']
 let g:syntastic_html_tidy_ignore_errors = ["trimming empty <"]
 " YouCompleteMe
-let g:ycm_python_binary_path = 'python3'
+"let g:ycm_python_binary_path = 'python3'
 " make YCM compatible with UltiSnips (using supertab)
 let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 let g:SuperTabDefaultCompletionType = '<C-n>'
-" Markdown
-let g:vim_markdown_toc_autofit = 1
-let g:vim_markdown_frontmatter = 1
-" Colorizer
-let g:colorizer_maxlines = 1000
-"}}}
-
-" Custom settings {{{
-if filereadable($VIMFILES . '/custom/vimrc.plugin')
-  source $VIMFILES/custom/vimrc.plugin
-endif
+" snips personal info
+let g:snips_author = 'Francis Niu'
+let g:snips_github = 'https://github.com/flniu'
 "}}}
 
 " vim:et:ts=2:sw=2:fdm=marker:
