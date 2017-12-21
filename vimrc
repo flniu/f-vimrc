@@ -54,6 +54,7 @@ set virtualedit=block
 set showcmd
 set showmatch
 set wildmenu
+set wildignore+=*/.git/*,*/.hg/*,*/.svn/*
 set nrformats-=octal
 set iskeyword+=-
 "}}}
