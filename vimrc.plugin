@@ -1,6 +1,6 @@
 " Plugin configuration, sourced by vimrc
 " Author: Francis Niu (https://github.com/flniu)
-" Last Change: 2017-12-21
+" Last Change: 2018-05-18
 
 " vim-plug {{{
 call plug#begin()
@@ -95,6 +95,12 @@ Plug 'vim-scripts/nginx.vim'
 Plug 'cespare/vim-toml'
 " Syntax for Jinja2
 Plug 'Glench/Vim-Jinja2-Syntax'
+" Syntax for w3af
+Plug 'vim-scripts/w3af.vim'
+au BufNewFile,BufRead *.w3af setf w3af
+" Syntax for vault hcl
+Plug 'b4b4r07/vim-hcl'
+au FileType hcl set et ts=2 sw=2
 "}}}
 
 call plug#end()
