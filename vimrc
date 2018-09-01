@@ -1,6 +1,6 @@
 " My vimrc for Mac/Linux/Windows * GUI/Console
 " Author: Francis Niu (https://github.com/flniu)
-" Last Change: 2017-12-17
+" Last Change: 2018-07-01
 
 " Global variables {{{
 if has('win32') || has('win64')
@@ -222,7 +222,7 @@ nmap <Leader>wr :set wrap!<CR>
 nmap <Leader>xxd :call XxdToggle()<CR>
 function! XxdToggle() "{{{
   let mod = &mod
-  if getline(1) =~ "^0000000:"
+  if getline(1) =~ "^000000"
     exe '%!xxd -r'
     set ft=
     doautocmd filetypedetect BufReadPost
