@@ -1,6 +1,6 @@
 " Plugin configuration, sourced by vimrc
 " Author: Francis Niu (https://github.com/flniu)
-" Last Change: 2018-05-18
+" Last Change: 2020-03-01
 
 " vim-plug {{{
 call plug#begin()
@@ -16,13 +16,13 @@ Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 " Smart buffer closing
 Plug 'cespare/vim-sbd'
 " Tagbar (require: ctags), displays tags window
-Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
+"Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
 " MRU, access most recently used files
 Plug 'yegappan/mru'
 " CtrlP, fuzzy file finder
-Plug 'ctrlpvim/ctrlp.vim'
+"Plug 'ctrlpvim/ctrlp.vim'
 " CtrlSF (require: ack), search everywhere
-Plug 'dyng/ctrlsf.vim'
+"Plug 'dyng/ctrlsf.vim'
 " EasyMotion, move cursor more easily
 Plug 'easymotion/vim-easymotion'
 " ChooseWin, jump windows more easily
@@ -39,17 +39,19 @@ if g:my_os != 'Windows'
 endif
 " Diff directories
 Plug 'vim-scripts/DirDiff.vim'
+" fzf
+Plug '~/.fzf'
 "}}}
 
 " Editing {{{
 " EditorConfig
 Plug 'editorconfig/editorconfig-vim'
 " Syntastic, syntax checking
-Plug 'scrooloose/syntastic'
+"Plug 'scrooloose/syntastic'
 " YouCompleteMe, code completion
-Plug 'Valloric/YouCompleteMe'
+"Plug 'Valloric/YouCompleteMe'
 " SuperTab, Perform all insert mode completions with Tab
-Plug 'ervandew/supertab'
+"Plug 'ervandew/supertab'
 " vim-snippets, depends on ultisnips
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 " Insert or delete brackets, parens, quotes in pair
@@ -73,6 +75,8 @@ Plug 'flniu/txt.vim'
 Plug 'flniu/vim-markdown'
 let g:vim_markdown_toc_autofit = 1
 let g:vim_markdown_frontmatter = 1
+" Note
+Plug 'xolox/vim-misc' | Plug 'xolox/vim-notes'
 "}}}
 
 " Web development {{{
@@ -117,8 +121,8 @@ if exists(':TagbarToggle') == 2
   nmap <F12> :TagbarToggle<CR>
 endif
 " CtrlSF
-nmap <C-S-F> <Plug>CtrlSFPrompt
-vmap <C-S-F> <Plug>CtrlSFVwordPath
+"nmap <C-S-F> <Plug>CtrlSFPrompt
+"vmap <C-S-F> <Plug>CtrlSFVwordPath
 " ChooseWin
 nmap - <Plug>(choosewin)
 " Syntastic
