@@ -1,6 +1,6 @@
 " Plugin configuration, sourced by vimrc
 " Author: Francis Niu (https://github.com/flniu)
-" Last Change: 2020-03-01
+" Last Change: 2020-07-03
 
 " vim-plug {{{
 call plug#begin()
@@ -91,6 +91,11 @@ let g:colorizer_maxlines = 1000
 " Syntax for Python
 Plug 'hdima/python-syntax'
 let python_highlight_all = 1
+" Syntax for Vue
+Plug 'posva/vim-vue'
+"let g:vue_pre_processors = ['typescript', 'scss']
+let g:vue_pre_processors = 'detect_on_enter'
+autocmd FileType vue syntax sync fromstart
 " Syntax for Confluence wiki
 Plug 'flniu/confluencewiki.vim'
 " Syntax for nginx
