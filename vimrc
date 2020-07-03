@@ -1,6 +1,6 @@
 " My vimrc for Mac/Linux/Windows * GUI/Console
 " Author: Francis Niu (https://github.com/flniu)
-" Last Change: 2020-03-01
+" Last Change: 2020-05-20
 
 " Global variables {{{
 if has('win32') || has('win64')
@@ -250,7 +250,7 @@ nmap <Leader>fm :set ff=mac<CR>
 " Search visual selected text
 vmap <silent> // y/<C-R>=substitute(escape(@",'\\/.*^$~[]'),'\n','\\n','g')<CR><CR>
 " Search conflicts
-nmap <Leader>cf /<<<\+\\|===\+\\|>>>\+<CR>
+nmap <Leader>cf /<<<<\+\\|====\+\\|>>>>\+<CR>
 " Save with sudo
 cmap w!! w !sudo tee >/dev/null %
 "}}}
