@@ -1,6 +1,6 @@
 " My vimrc for Mac/Linux/Windows * GUI/Console
 " Author: Francis Niu (https://github.com/flniu)
-" Last Change: 2020-05-20
+" Last Change: 2020-07-17
 
 " Global variables {{{
 if has('win32') || has('win64')
@@ -272,9 +272,13 @@ command! -range=% Count <line1>,<line2>sort | <line1>,<line2>s#\(^.\+$\)\(\n^\1$
 " Write temp file, optional file extension name
 command! -nargs=? WT call WriteTempFile(<f-args>)
 function! WriteTempFile(...) "{{{
-  if empty(expand('%'))
-    let filename = strftime("%Y%m%d%H%M%S") . '.' . (a:0 >= 1 ? a:1 : 'tmp')
-    exe 'write $TMP/' . filename
+  let old_filename = expand('%')
+  let new_filename = $TMP . '/' . strftime("%Y%m%d%H%M%S") . '.' . (a:0 >= 1 ? a:1 : 'tmp')
+  if empty(old_filename)
+    exe 'write ' . new_filename
+  else
+    exe '!mv ' . old_filename . ' ' . new_filename
+    exe 'edit ' . new_filename
   endif
 endfunction "}}}
 command! -range=% FormatJSON <line1>,<line2>!python -m json.tool
