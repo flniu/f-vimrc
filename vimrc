@@ -1,38 +1,45 @@
-" My vimrc for Mac/Linux/Windows * GUI/Console
+" My vimrc for Mac/Linux/Windows * GUI/Console * Vim/Nvim
 " Author: Francis Niu (https://github.com/flniu)
-" Last Change: 2020-07-17
+" Last Change: 2020-07-18
 
 " Global variables {{{
-if has('win32') || has('win64')
-  let g:my_os = 'Windows'
-  let g:my_font = 'Consolas:h%d'
-  let g:my_fontsize_default = 11
-  let g:my_window_size = { 'S': [32, 108], 'L': [50, 160] }
-  let $VIMFILES = $HOME . '\vimfiles'
+let is_nvim = has('nvim')
+if is_nvim
+  let $MYVIMRC = '~/.config/nvim/init.vim'
+  let $VIMFILES = '~/.config/nvim'
 else
-  if has('mac')
-    let g:my_os = 'Mac'
-    let g:my_font = 'Monaco:h%d'
-    let g:my_fontsize_default = 12
-    let g:my_window_size = { 'S': [40, 120], 'L': [60, 180] }
+  if has('win32') || has('win64')
+    let g:my_os = 'Windows'
+    let g:my_font = 'Consolas:h%d'
+    let g:my_fontsize_default = 11
+    let g:my_window_size = { 'S': [32, 108], 'L': [50, 160] }
+    let $VIMFILES = $HOME . '\vimfiles'
   else
-    let g:my_os = 'Linux'
-    let g:my_font = 'DejaVu Sans Mono %d'
-    let g:my_fontsize_default = 10
-    let g:my_window_size = { 'S': [40, 120], 'L': [50, 160] }
-  endif
-  let $VIMFILES = $HOME . '/.vim'
-  if !exists($TMP)
-    let $TMP = $HOME . '/.tmp'
+    if has('mac')
+      let g:my_os = 'Mac'
+      let g:my_font = 'Monaco:h%d'
+      let g:my_fontsize_default = 12
+      let g:my_window_size = { 'S': [40, 120], 'L': [60, 180] }
+    else
+      let g:my_os = 'Linux'
+      let g:my_font = 'DejaVu Sans Mono %d'
+      let g:my_fontsize_default = 10
+      let g:my_window_size = { 'S': [40, 120], 'L': [50, 160] }
+    endif
+    let $VIMFILES = $HOME . '/.vim'
   endif
 endif
+if !exists($TMP)
+  let $TMP = '~/.tmp'
+endif
+let $MYVIMRC_PLUGIN = $VIMFILES . '/vimrc.plugin'
 "}}}
 
 " General settings {{{
 set nocompatible
-if filereadable($VIMFILES . '/vimrc.plugin')
-  source $VIMFILES/vimrc.plugin
-endif
+try
+  source $MYVIMRC_PLUGIN
+endtry
 filetype plugin indent on
 syntax on
 if has('mouse')
@@ -95,25 +102,27 @@ endif
 "}}}
 
 " File {{{
-set fileformats=unix,dos
-set noswapfile
-set nobackup
-"set nowritebackup
-"set autoread
-set autowrite
-set viminfo+=n$VIMFILES/.viminfo
-if has('persistent_undo')
-  let $VIMUNDODIR = $VIMFILES . '/.undodir'
-  if !isdirectory($VIMUNDODIR) && exists('*mkdir')
-    call mkdir($VIMUNDODIR, 'p', 0700)
+if !is_nvim
+  set fileformats=unix,dos
+  set noswapfile
+  set nobackup
+  "set nowritebackup
+  "set autoread
+  set autowrite
+  set viminfofile=$VIMFILES/.viminfo
+  if has('persistent_undo')
+    let $VIMUNDODIR = $VIMFILES . '/.undodir'
+    if !isdirectory($VIMUNDODIR) && exists('*mkdir')
+      call mkdir($VIMUNDODIR, 'p', 0700)
+    endif
+    set undodir=$VIMUNDODIR,$TMP,.
+    set undofile
   endif
-  set undodir=$VIMUNDODIR,$TMP,.
-  set undofile
-endif
-if v:version >= 800
-  set cryptmethod=blowfish2
-elseif v:version >= 703
-  set cryptmethod=blowfish
+  if v:version >= 800
+    set cryptmethod=blowfish2
+  elseif v:version >= 703
+    set cryptmethod=blowfish
+  endif
 endif
 "}}}
 
@@ -125,44 +134,45 @@ set formatoptions+=mM
 "}}}
 
 " GUI & Terminal {{{
-if has('gui_running')
-  colorscheme desert
-  set guioptions=ce
-  " Font & Window size {{{
-  function! SetFontSize(action) "{{{
-    if a:action == '+'
-      let g:my_fontsize += 1
-    elseif a:action == '-'
-      let g:my_fontsize -= 1
-    else
-      let g:my_fontsize = g:my_fontsize_default
-    endif
-    let &gfn = printf(g:my_font, g:my_fontsize)
-  endfunction "}}}
-  call SetFontSize('0')
-  function! SetWindowSize(level) "{{{
-    if g:my_os == 'Windows' && a:level == 'L'
-      simalt ~x
-    else
-      let &lines = g:my_window_size[a:level][0]
-      let &columns = g:my_window_size[a:level][1]
-    endif
-  endfunction "}}}
-  call SetWindowSize('L')
-  nmap <C-CR> :call SetFontSize('0')<CR>
-  nmap <C-Up> :call SetFontSize('+')<CR>
-  nmap <C-Down> :call SetFontSize('-')<CR>
-  nmap <C-Left> :call SetWindowSize('S')<CR>
-  nmap <C-Right> :call SetWindowSize('L')<CR>
-  "}}}
-else
-  colorscheme desert
-  set t_Co=256
+if !is_nvim
+  if has('gui_running')
+    set guioptions=ce
+    " Font & Window size {{{
+    function! SetFontSize(action) "{{{
+      if a:action == '+'
+        let g:my_fontsize += 1
+      elseif a:action == '-'
+        let g:my_fontsize -= 1
+      else
+        let g:my_fontsize = g:my_fontsize_default
+      endif
+      let &gfn = printf(g:my_font, g:my_fontsize)
+    endfunction "}}}
+    call SetFontSize('0')
+    function! SetWindowSize(level) "{{{
+      if g:my_os == 'Windows' && a:level == 'L'
+        simalt ~x
+      else
+        let &lines = g:my_window_size[a:level][0]
+        let &columns = g:my_window_size[a:level][1]
+      endif
+    endfunction "}}}
+    call SetWindowSize('L')
+    nmap <C-CR> :call SetFontSize('0')<CR>
+    nmap <C-Up> :call SetFontSize('+')<CR>
+    nmap <C-Down> :call SetFontSize('-')<CR>
+    nmap <C-Left> :call SetWindowSize('S')<CR>
+    nmap <C-Right> :call SetWindowSize('L')<CR>
+    "}}}
+  else
+    set t_Co=256
+  endif
 endif
 if &term != 'win32'
   try
     colors molokai
   catch
+    colors desert
   endtry
 endif
 "}}}
@@ -309,17 +319,19 @@ au BufWritePre,FileWritePre *.{cmd,bat} if &bomb == 0 | set fenc=cp936 ff=dos | 
 "}}}
 
 " Platform settings {{{
-if g:my_os == 'Windows'
-  if filereadable($VIMFILES . '/vimrc.windows')
-    source $VIMFILES/vimrc.windows
-  endif
-elseif g:my_os == 'Mac'
-  if filereadable($VIMFILES . '/vimrc.mac')
-    source $VIMFILES/vimrc.mac
-  endif
-else
-  if filereadable($VIMFILES . '/vimrc.linux')
-    source $VIMFILES/vimrc.linux
+if !is_nvim
+  if g:my_os == 'Windows'
+    if filereadable($VIMFILES . '/vimrc.windows')
+      source $VIMFILES/vimrc.windows
+    endif
+  elseif g:my_os == 'Mac'
+    if filereadable($VIMFILES . '/vimrc.mac')
+      source $VIMFILES/vimrc.mac
+    endif
+  else
+    if filereadable($VIMFILES . '/vimrc.linux')
+      source $VIMFILES/vimrc.linux
+    endif
   endif
 endif
 "}}}
