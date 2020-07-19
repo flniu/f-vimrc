@@ -1,4 +1,4 @@
-" My vimrc for Mac/Linux/Windows * GUI/Console * Vim/Nvim
+" My vimrc for Mac/Linux/Windows * GUI/Console * Vim/Neovim
 " Author: Francis Niu (https://github.com/flniu)
 " Last Change: 2020-07-18
 
