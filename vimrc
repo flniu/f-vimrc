@@ -58,6 +58,7 @@ set whichwrap+=<,>,[,]
 set incsearch
 set hlsearch
 set ignorecase
+set smartcase
 set virtualedit=block
 set showcmd
 set showmatch
