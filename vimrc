@@ -1,12 +1,13 @@
 " My vimrc for Mac/Linux/Windows * GUI/Console * Vim/Neovim
 " Author: Francis Niu (https://github.com/flniu)
-" Last Change: 2020-07-18
+" Last Change: 2020-07-29
 
 " Global variables {{{
-let is_nvim = has('nvim')
-if is_nvim
-  let $MYVIMRC = '~/.config/nvim/init.vim'
+let g:is_nvim = has('nvim')
+if g:is_nvim
   let $VIMFILES = '~/.config/nvim'
+  let $MYVIMRC = $VIMFILES . '/init.vim'
+  let $MYVIMRC_PLUGIN = $VIMFILES . '/plugin.vim'
 else
   if has('win32') || has('win64')
     let g:my_os = 'Windows'
@@ -28,11 +29,11 @@ else
     endif
     let $VIMFILES = $HOME . '/.vim'
   endif
+  let $MYVIMRC_PLUGIN = $VIMFILES . '/vimrc.plugin'
 endif
 if !exists($TMP)
   let $TMP = '~/.tmp'
 endif
-let $MYVIMRC_PLUGIN = $VIMFILES . '/vimrc.plugin'
 "}}}
 
 " General settings {{{
@@ -102,7 +103,7 @@ endif
 "}}}
 
 " File {{{
-if !is_nvim
+if !g:is_nvim
   set fileformats=unix,dos
   set noswapfile
   set nobackup
@@ -134,7 +135,7 @@ set formatoptions+=mM
 "}}}
 
 " GUI & Terminal {{{
-if !is_nvim
+if !g:is_nvim
   if has('gui_running')
     set guioptions=ce
     " Font & Window size {{{
@@ -319,7 +320,7 @@ au BufWritePre,FileWritePre *.{cmd,bat} if &bomb == 0 | set fenc=cp936 ff=dos | 
 "}}}
 
 " Platform settings {{{
-if !is_nvim
+if !g:is_nvim
   if g:my_os == 'Windows'
     if filereadable($VIMFILES . '/vimrc.windows')
       source $VIMFILES/vimrc.windows

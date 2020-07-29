@@ -1,28 +1,33 @@
 " Plugin configuration, sourced by vimrc
 " Author: Francis Niu (https://github.com/flniu)
-" Last Change: 2020-07-03
+" Last Change: 2020-07-29
 
 " vim-plug {{{
 call plug#begin()
 
+" Vim only{{{
+if !g:is_nvim
+  " NerdTree, folder tree explorer
+  Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+  " Tagbar (require: ctags), displays tags window
+  Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
+  " Mini buffer explorer
+  Plug 'fholgado/minibufexpl.vim'
+  let g:miniBufExplHideWhenDiff = 1
+  " Smart buffer closing
+  Plug 'cespare/vim-sbd'
+  " Diff directories
+  Plug 'vim-scripts/DirDiff.vim'
+endif
+"}}}
+
 " General {{{
 " Color schemes
 Plug 'flniu/f-vim-colors'
-" Mini buffer explorer
-Plug 'fholgado/minibufexpl.vim'
-let g:miniBufExplHideWhenDiff = 1
-" NerdTree, folder tree explorer
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
-" Smart buffer closing
-Plug 'cespare/vim-sbd'
-" Tagbar (require: ctags), displays tags window
-"Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
 " MRU, access most recently used files
 Plug 'yegappan/mru'
-" CtrlP, fuzzy file finder
-"Plug 'ctrlpvim/ctrlp.vim'
 " CtrlSF (require: ack), search everywhere
-"Plug 'dyng/ctrlsf.vim'
+Plug 'dyng/ctrlsf.vim'
 " EasyMotion, move cursor more easily
 Plug 'easymotion/vim-easymotion'
 " ChooseWin, jump windows more easily
@@ -31,14 +36,8 @@ Plug 't9md/vim-choosewin', { 'on': '<Plug>(choosewin)' }
 Plug 'tracyone/mark.vim'
 " CmdlineComplete, complete command-line from current file
 Plug 'flniu/CmdlineComplete'
-" AsyncRun, Run Async Shell Commands
-Plug 'skywind3000/asyncrun.vim', { 'on': 'AsyncRun' }
 " GitGutter, shows a git diff in the gutter
-if g:my_os != 'Windows'
-  Plug 'airblade/vim-gitgutter'
-endif
-" Diff directories
-Plug 'vim-scripts/DirDiff.vim'
+Plug 'airblade/vim-gitgutter'
 " fzf
 Plug '~/.fzf'
 "}}}
@@ -51,7 +50,7 @@ Plug 'editorconfig/editorconfig-vim'
 " YouCompleteMe, code completion
 "Plug 'Valloric/YouCompleteMe'
 " SuperTab, Perform all insert mode completions with Tab
-"Plug 'ervandew/supertab'
+Plug 'ervandew/supertab'
 " vim-snippets, depends on ultisnips
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 " Insert or delete brackets, parens, quotes in pair
