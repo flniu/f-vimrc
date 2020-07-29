@@ -18,6 +18,8 @@ if !g:is_nvim
   Plug 'cespare/vim-sbd'
   " Diff directories
   Plug 'vim-scripts/DirDiff.vim'
+  " vim-snippets, depends on ultisnips
+  Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 endif
 "}}}
 
@@ -51,8 +53,6 @@ Plug 'editorconfig/editorconfig-vim'
 "Plug 'Valloric/YouCompleteMe'
 " SuperTab, Perform all insert mode completions with Tab
 Plug 'ervandew/supertab'
-" vim-snippets, depends on ultisnips
-Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 " Insert or delete brackets, parens, quotes in pair
 Plug 'jiangmiao/auto-pairs'
 " surround, quoting/parenthesizing
@@ -125,8 +125,8 @@ if exists(':TagbarToggle') == 2
   nmap <F12> :TagbarToggle<CR>
 endif
 " CtrlSF
-"nmap <C-S-F> <Plug>CtrlSFPrompt
-"vmap <C-S-F> <Plug>CtrlSFVwordPath
+nmap <C-S-F> <Plug>CtrlSFPrompt
+vmap <C-S-F> <Plug>CtrlSFVwordPath
 " ChooseWin
 nmap - <Plug>(choosewin)
 " Syntastic
