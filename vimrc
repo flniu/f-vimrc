@@ -1,6 +1,6 @@
 " My vimrc for Mac/Linux/Windows * GUI/Console * Vim/Neovim
 " Author: Francis Niu (https://github.com/flniu)
-" Last Change: 2020-07-29
+" Updated At: 2020-09-06
 
 " Global variables {{{
 let g:is_nvim = has('nvim')
@@ -302,10 +302,11 @@ au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g
 " timestamp
 au BufWritePre,FileWritePre * call SetTimeStamp()
 function! SetTimeStamp() "{{{
+  let timestamp = strftime('%Y-%m-%d')
   if line('$') > 10
-    1,10s/Last Change:\s.*$/\=strftime("Last Change: %Y-%m-%d")/e
+    1,10s/\(Updated At\|updated_at\):\s.*$/\=submatch(1) . ': ' . timestamp/e
   else
-    %s/Last Change:\s.*$/\=strftime("Last Change: %Y-%m-%d")/e
+    %s/\(Updated At\|updated_at\):\s.*$/\=submatch(1) . ': ' . timestamp/e
   endif
 endfunction "}}}
 " filetype config
