@@ -100,6 +100,8 @@ au BufNewFile,BufRead *.w3af setf w3af
 " Syntax for vault hcl
 Plug 'b4b4r07/vim-hcl'
 au FileType hcl set et ts=2 sw=2
+" Syntax for ER
+Plug 'flniu/er.vim'
 "}}}
 
 call plug#end()
