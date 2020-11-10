@@ -14,4 +14,8 @@ endif
 nmap <S-Left> zH
 nmap <S-Right> zL
 
+if exists('&pythonthreedll')
+  set pythonthreedll=/usr/local/Frameworks/Python.framework/Versions/Current/Python
+endif
+
 " vim:et:ts=2:sw=2:fdm=marker:ft=vim:
