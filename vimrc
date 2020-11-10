@@ -1,6 +1,6 @@
 " My vimrc for Mac/Linux/Windows * GUI/Console * Vim/Neovim
 " Author: Francis Niu (https://github.com/flniu)
-" Updated At: 2020-09-06
+" Updated At: 2020-11-10
 
 " Global variables {{{
 let g:is_nvim = has('nvim')
@@ -221,6 +221,7 @@ nmap <Leader>pa :set paste!<CR>
 nmap <Leader>et :set expandtab!<CR>
 nmap <Leader>li :set list!<CR>
 nmap <Leader>sp :set spell!<CR>
+nmap <Leader>ws :set wrapscan!<CR>
 " Toggle line number & relative line number
 nmap <Leader>nu :set nu!<CR>
 nmap <Leader>rn :set rnu!<CR>
