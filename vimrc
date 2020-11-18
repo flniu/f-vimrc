@@ -1,6 +1,6 @@
 " My vimrc for Mac/Linux/Windows * GUI/Console * Vim/Neovim
 " Author: Francis Niu (https://github.com/flniu)
-" Updated At: 2020-11-10
+" Updated At: 2020-11-18
 
 " Global variables {{{
 let g:is_nvim = has('nvim')
@@ -294,7 +294,7 @@ function! WriteTempFile(...) "{{{
     exe 'edit ' . new_filename
   endif
 endfunction "}}}
-command! -range=% FormatJSON <line1>,<line2>!python -m json.tool
+command! -range=% FormatJSON <line1>,<line2>s/'/"/ge | <line1>,<line2>s/True\|False\|None/"\0"/ge |  <line1>,<line2>!python -m json.tool
 "}}}
 
 " Autocmds {{{
