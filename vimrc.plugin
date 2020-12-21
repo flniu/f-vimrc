@@ -81,6 +81,8 @@ let g:colorizer_maxlines = 1000
 " Syntax for Python
 Plug 'hdima/python-syntax'
 let python_highlight_all = 1
+" CSV
+Plug 'mechatroner/rainbow_csv'
 " Syntax for Vue
 Plug 'posva/vim-vue'
 "let g:vue_pre_processors = ['typescript', 'scss']
