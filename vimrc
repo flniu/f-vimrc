@@ -298,6 +298,7 @@ function! WriteTempFile(...) "{{{
   endif
 endfunction "}}}
 command! -range=% FormatJSON <line1>,<line2>s/'/"/ge | <line1>,<line2>s/True\|False\|None/"\0"/ge |  <line1>,<line2>!python -m json.tool
+command! -range=% Alembic2Dot <line1>,<line2>s/ (\(head\|branchpoint\|mergepoint\))//ge | <line1>,<line2>s#^\(\x\+\) -> \(\x\+\),#"\1" -> "\2"; //#e | <line1>,<line2>s#^\(\x\+\), \(\x\+\) -> \(\x\+\),#{ "\1" "\2" } -> "\3"; //#e
 "}}}
 
 " Autocmds {{{
