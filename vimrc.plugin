@@ -106,6 +106,8 @@ au FileType hcl set et ts=2 sw=2
 Plug 'flniu/er.vim'
 "}}}
 
+Plug 'vim-scripts/DrawIt'
+
 call plug#end()
 "}}}
 
