@@ -1,6 +1,6 @@
 " My vimrc for Mac/Linux/Windows * GUI/Console * Vim/Neovim
 " Author: Francis Niu (https://github.com/flniu)
-" Updated At: 2020-11-18
+" Updated At: 2020-12-27
 
 " Global variables {{{
 let g:is_nvim = has('nvim')
@@ -251,6 +251,9 @@ nmap <Leader>ac :%s/^.\+$/\0,/e<CR>
 nmap <Leader>qc :%s/^.\+$/'\0',/e<CR>
 vmap <Leader>ac :s/^.\+$/\0,/e<CR>
 vmap <Leader>qc :s/^.\+$/'\0',/e<CR>
+" Change to select sql
+nmap <Leader>as :%s/^.\+$/UNION ALL SELECT \0/e <Bar> 1s/^UNION ALL //e<CR>
+nmap <Leader>qs :%s/^.\+$/UNION ALL SELECT '\0'/e <Bar> 1s/^UNION ALL //e<CR>
 " Change fileencoding, Toggle BOM
 nmap <Leader>eu :set fenc=utf-8<CR>
 nmap <Leader>eg :set fenc=cp936<CR>
