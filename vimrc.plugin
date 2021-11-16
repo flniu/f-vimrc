@@ -25,6 +25,7 @@ endif
 Plug 'flniu/f-vim-colors'
 " MRU, access most recently used files
 Plug 'yegappan/mru'
+let MRU_Exclude_Files = '.*MSG$'
 " CtrlSF (require: ack), search everywhere
 Plug 'dyng/ctrlsf.vim'
 " EasyMotion, move cursor more easily
@@ -38,7 +39,7 @@ Plug 'flniu/CmdlineComplete'
 " GitGutter, shows a git diff in the gutter
 Plug 'airblade/vim-gitgutter'
 " fzf
-Plug '~/.fzf'
+Plug 'junegunn/fzf'
 "}}}
 
 " Editing {{{
@@ -73,8 +74,8 @@ let g:vim_markdown_frontmatter = 1
 " Emmet, toolkit for web-developers
 Plug 'mattn/emmet-vim'
 " Paint css colors with the real color
-Plug 'lilydjwg/colorizer'
-let g:colorizer_maxlines = 1000
+"Plug 'lilydjwg/colorizer'
+"let g:colorizer_maxlines = 1000
 "}}}
 
 " Syntaxs{{{
@@ -114,7 +115,7 @@ call plug#end()
 " Plugin variables & key-mappings {{{
 " NerdTree
 if exists(':NERDTreeToggle') == 2
-  nmap <F11> :NERDTreeToggle<CR>
+  nmap <F9> :NERDTreeToggle<CR>
   let NERDTreeIgnore = ['\.pyc$']
 endif
 " Tagbar
