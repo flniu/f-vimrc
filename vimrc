@@ -1,6 +1,6 @@
 " My vimrc for Mac/Linux/Windows * GUI/Console * Vim/Neovim
 " Author: Francis Niu (https://github.com/flniu)
-" Updated At: 2021-11-05
+" Updated At: 2022-03-18
 
 " Global variables {{{
 let g:is_nvim = has('nvim')
@@ -66,7 +66,6 @@ set wildmenu
 set wildignore+=*/.git/*,*/.hg/*,*/.svn/*
 set nrformats-=octal
 set iskeyword+=-
-set spell
 "}}}
 
 " Layout & indent {{{
@@ -298,7 +297,9 @@ function! WriteTempFile(...) "{{{
     exe 'edit ' . new_filename
   endif
 endfunction "}}}
-command! -range=% FormatJSON <line1>,<line2>s/ObjectId(\("\w\+"\))/\1/ge | <line1>,<line2>!python3 -m json.tool
+command! -range=% JSON2String <line1>,<line2>join | <line1>s/"/\\"/g | <line1>s/^/"/ | <line1>s/$/"/
+command! -range=% String2JSON <line1>,<line2>join | <line1>s/^"//e | <line1>s/"$//e | <line1>s/\\\\/\\/ge | <line1>s/\\"/"/ge | <line1>FormatJSON
+command! -range=% FormatJSON <line1>,<line2>s/ObjectId(\("\w\+"\))/\1/ge | <line1>,<line2>!python3 -m json.tool --no-ensure-ascii
 command! -range=% FormatPython <line1>,<line2>!black -
 command! -range=% Alembic2Dot <line1>,<line2>s/ (\(head\|branchpoint\|mergepoint\))//ge | <line1>,<line2>s#^\(\x\+\) -> \(\x\+\),#"\1" -> "\2"; //#e | <line1>,<line2>s#^\(\x\+\), \(\x\+\) -> \(\x\+\),#{ "\1" "\2" } -> "\3"; //#e
 "}}}
