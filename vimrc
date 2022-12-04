@@ -1,6 +1,6 @@
 " My vimrc for Mac/Linux/Windows * GUI/Console * Vim/Neovim
 " Author: Francis Niu (https://github.com/flniu)
-" Updated At: 2022-10-08
+" Updated At: 2022-10-21
 
 " Global variables {{{
 let g:is_nvim = has('nvim')
@@ -301,6 +301,7 @@ command! -range=% JSON2String <line1>,<line2>join | <line1>s/\\/\\\\/ge | <line1
 command! -range=% String2JSON <line1>,<line2>join | <line1>s/^"//e | <line1>s/"$//e | <line1>s/\\\\/\\/ge | <line1>s/\\"/"/ge | <line1>FormatJSON
 command! -range=% FormatJSON <line1>,<line2>s/ObjectId(\("\w\+"\))/\1/ge | <line1>,<line2>!python3 -m json.tool --no-ensure-ascii
 command! -range=% FormatJSONSortKeys <line1>,<line2>s/ObjectId(\("\w\+"\))/\1/ge | <line1>,<line2>!python3 -m json.tool --no-ensure-ascii --sort-keys
+command! -range=% FormatJSONCompact <line1>,<line2>s/ObjectId(\("\w\+"\))/\1/ge | <line1>,<line2>!python3 -m json.tool --no-ensure-ascii --compact
 command! -range=% FormatPython <line1>,<line2>!black -
 command! -range=% Alembic2Dot <line1>,<line2>s/ (\(head\|branchpoint\|mergepoint\))//ge | <line1>,<line2>s#^\(\x\+\) -> \(\x\+\),#"\1" -> "\2"; //#e | <line1>,<line2>s#^\(\x\+\), \(\x\+\) -> \(\x\+\),#{ "\1" "\2" } -> "\3"; //#e
 "}}}
