@@ -1,6 +1,6 @@
 " My vimrc for Mac/Linux/Windows * GUI/Console * Vim/Neovim
 " Author: Francis Niu (https://github.com/flniu)
-" Updated At: 2022-10-21
+" Updated At: 2023-05-08
 
 " Global variables {{{
 let g:is_nvim = has('nvim')
@@ -304,6 +304,15 @@ command! -range=% FormatJSONSortKeys <line1>,<line2>s/ObjectId(\("\w\+"\))/\1/ge
 command! -range=% FormatJSONCompact <line1>,<line2>s/ObjectId(\("\w\+"\))/\1/ge | <line1>,<line2>!python3 -m json.tool --no-ensure-ascii --compact
 command! -range=% FormatPython <line1>,<line2>!black -
 command! -range=% Alembic2Dot <line1>,<line2>s/ (\(head\|branchpoint\|mergepoint\))//ge | <line1>,<line2>s#^\(\x\+\) -> \(\x\+\),#"\1" -> "\2"; //#e | <line1>,<line2>s#^\(\x\+\), \(\x\+\) -> \(\x\+\),#{ "\1" "\2" } -> "\3"; //#e
+function! TS2DT(input) "{{{
+  let ts = str2nr(a:input) / 1000 " assume input is timestamp in milliseconds
+  let dt = strftime("%Y-%m-%d %H:%M:%S%z", ts)
+  return dt
+endfunction "}}}
+function! DT2TS(input) "{{{
+  let epoch = strptime("%Y-%m-%d %H:%M:%S%z", a:input)
+  return epoch * 1000 " return timestamp in milliseconds
+endfunction "}}}
 "}}}
 
 " Autocmds {{{
@@ -320,6 +329,7 @@ function! SetTimeStamp() "{{{
   endif
 endfunction "}}}
 " filetype config
+au FileType json set foldmethod=indent
 au FileType css,scss,javascript set foldmethod=marker foldmarker={,}
 au FileType snippets set noet ts=4 sw=4 fdm=indent noml
 au FileType yaml set et ts=2 sw=2

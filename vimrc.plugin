@@ -10,13 +10,13 @@ if !g:is_nvim
   " NerdTree, folder tree explorer
   Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
   " Tagbar (require: ctags), displays tags window
-  Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
+  "Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
   " Smart buffer closing
   Plug 'cespare/vim-sbd'
   " Diff directories
   Plug 'vim-scripts/DirDiff.vim'
   " vim-snippets, depends on ultisnips
-  Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+  "Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 endif
 "}}}
 
@@ -27,9 +27,9 @@ Plug 'flniu/f-vim-colors'
 Plug 'yegappan/mru'
 let MRU_Exclude_Files = '.*MSG$'
 " CtrlSF (require: ack), search everywhere
-Plug 'dyng/ctrlsf.vim'
+"Plug 'dyng/ctrlsf.vim'
 " EasyMotion, move cursor more easily
-Plug 'easymotion/vim-easymotion'
+"Plug 'easymotion/vim-easymotion'
 " ChooseWin, jump windows more easily
 Plug 't9md/vim-choosewin', { 'on': '<Plug>(choosewin)' }
 " Mark, highlight multiple words
@@ -39,16 +39,16 @@ Plug 'flniu/CmdlineComplete'
 " GitGutter, shows a git diff in the gutter
 Plug 'airblade/vim-gitgutter'
 " fzf
-Plug 'junegunn/fzf'
+"Plug 'junegunn/fzf'
 "}}}
 
 " Editing {{{
 " EditorConfig
 Plug 'editorconfig/editorconfig-vim'
 " SuperTab, Perform all insert mode completions with Tab
-Plug 'ervandew/supertab'
+"Plug 'ervandew/supertab'
 " Insert or delete brackets, parens, quotes in pair
-Plug 'jiangmiao/auto-pairs'
+"Plug 'jiangmiao/auto-pairs'
 " surround, quoting/parenthesizing
 Plug 'tpope/vim-surround'
 " pairs of handy bracket mappings
@@ -65,9 +65,9 @@ Plug 'terryma/vim-expand-region'
 " Syntax and settings for plain text
 Plug 'flniu/txt.vim'
 " Markdown Vim Mode
-Plug 'flniu/vim-markdown'
-let g:vim_markdown_toc_autofit = 1
-let g:vim_markdown_frontmatter = 1
+"Plug 'flniu/vim-markdown'
+"let g:vim_markdown_toc_autofit = 1
+"let g:vim_markdown_frontmatter = 1
 "}}}
 
 " Web development {{{
@@ -82,32 +82,35 @@ Plug 'mattn/emmet-vim'
 " Syntax for Python
 Plug 'hdima/python-syntax'
 let python_highlight_all = 1
+Plug 'psf/black', { 'branch': 'stable' }
 " CSV
 Plug 'mechatroner/rainbow_csv'
 " Syntax for Vue
-Plug 'posva/vim-vue'
+"Plug 'posva/vim-vue'
 "let g:vue_pre_processors = ['typescript', 'scss']
-let g:vue_pre_processors = 'detect_on_enter'
-autocmd FileType vue syntax sync fromstart
+"let g:vue_pre_processors = 'detect_on_enter'
+"autocmd FileType vue syntax sync fromstart
 " Syntax for Confluence wiki
-Plug 'flniu/confluencewiki.vim'
+"Plug 'flniu/confluencewiki.vim'
 " Syntax for nginx
 Plug 'vim-scripts/nginx.vim'
 " Syntax for TOML
 Plug 'cespare/vim-toml'
 " Syntax for Jinja2
-Plug 'Glench/Vim-Jinja2-Syntax'
+"Plug 'Glench/Vim-Jinja2-Syntax'
 " Syntax for w3af
-Plug 'vim-scripts/w3af.vim'
-au BufNewFile,BufRead *.w3af setf w3af
+"Plug 'vim-scripts/w3af.vim'
+"au BufNewFile,BufRead *.w3af setf w3af
 " Syntax for vault hcl
-Plug 'b4b4r07/vim-hcl'
-au FileType hcl set et ts=2 sw=2
+"Plug 'b4b4r07/vim-hcl'
+"au FileType hcl set et ts=2 sw=2
 " Syntax for ER
-Plug 'flniu/er.vim'
+"Plug 'flniu/er.vim'
+" Syntax for thrift
+Plug 'solarnz/thrift.vim'
+" Syntax for PlantUML
+Plug 'aklt/plantuml-syntax'
 "}}}
-
-Plug 'vim-scripts/DrawIt'
 
 call plug#end()
 "}}}
