@@ -1,6 +1,6 @@
 " My vimrc for Mac/Linux/Windows * GUI/Console * Vim/Neovim
 " Author: Francis Niu (https://github.com/flniu)
-" Updated At: 2023-05-15
+" Updated At: 2023-08-24
 
 " Global variables {{{
 let g:is_nvim = has('nvim')
@@ -20,7 +20,7 @@ else
       let g:my_os = 'Mac'
       let g:my_font = 'Monaco:h%d'
       let g:my_fontsize_default = 12
-      let g:my_window_size = { 'S': [40, 120], 'L': [60, 180] }
+      let g:my_window_size = { 'S': [40, 120], 'L': [99, 999] }
     else
       let g:my_os = 'Linux'
       let g:my_font = 'DejaVu Sans Mono %d'
@@ -298,10 +298,11 @@ function! WriteTempFile(...) "{{{
   endif
 endfunction "}}}
 command! -range=% JSON2String <line1>,<line2>join | <line1>s/\\/\\\\/ge | <line1>s/"/\\"/g | <line1>s/^/"/ | <line1>s/$/"/
-command! -range=% String2JSON <line1>,<line2>join | <line1>s/^"//e | <line1>s/"$//e | <line1>s/\\\\/\\/ge | <line1>s/\\"/"/ge | <line1>FormatJSON
-command! -range=% FormatJSON <line1>,<line2>!python3 -m json.tool --no-ensure-ascii
-command! -range=% FormatJSONSortKeys <line1>,<line2>!python3 -m json.tool --no-ensure-ascii --sort-keys
-command! -range=% FormatJSONCompact <line1>,<line2>!python3 -m json.tool --no-ensure-ascii --compact
+command! -range=% String2JSON <line1>,<line2>join | <line1>s/^"//e | <line1>s/",\=$//e | <line1>s/\\\\/\\/ge | <line1>s/\\"/"/ge | <line1>FormatJSON
+command! -range=% FormatJSON set ft=json | <line1>,<line2>!python3 -m json.tool --no-ensure-ascii
+command! -range=% FormatJSONSortKeys set ft=json | <line1>,<line2>!python3 -m json.tool --no-ensure-ascii --sort-keys
+command! -range=% FormatJSONCompact set ft=json | <line1>,<line2>!python3 -m json.tool --no-ensure-ascii --compact
+command! -range=% FixKunlunUnicode <line1>,<line2>s/"\(\\u[^"]\+\)"/\1/ge
 command! Data2JSON call Data2JSON()
 function! Data2JSON()"{{{
   v/^{"data"/d
@@ -315,14 +316,25 @@ endfunction"}}}
 command! -range=% FormatPython <line1>,<line2>!black -
 command! -range=% Alembic2Dot <line1>,<line2>s/ (\(head\|branchpoint\|mergepoint\))//ge | <line1>,<line2>s#^\(\x\+\) -> \(\x\+\),#"\1" -> "\2"; //#e | <line1>,<line2>s#^\(\x\+\), \(\x\+\) -> \(\x\+\),#{ "\1" "\2" } -> "\3"; //#e
 function! TS2DT(input) "{{{
-  let ts = str2nr(a:input) / 1000 " assume input is timestamp in milliseconds
+  let ts = str2nr(a:input)
   let dt = strftime("%Y-%m-%d %H:%M:%S%z", ts)
   return dt
 endfunction "}}}
 function! DT2TS(input) "{{{
   let epoch = strptime("%Y-%m-%d %H:%M:%S%z", a:input)
+  return epoch
+endfunction "}}}
+function! MS2DT(input) "{{{
+  let ts = str2nr(a:input) / 1000 " assume input is timestamp in milliseconds
+  let dt = strftime("%Y-%m-%d %H:%M:%S%z", ts)
+  return dt
+endfunction "}}}
+function! DT2MS(input) "{{{
+  let epoch = strptime("%Y-%m-%d %H:%M:%S%z", a:input)
   return epoch * 1000 " return timestamp in milliseconds
 endfunction "}}}
+command! -range TS2DT <line1>,<line2>s/\<\d\+\>/\=TS2DT(submatch(0))/g
+command! -range DT2TS <line1>,<line2>s/\<\d\d\d\d-\d\d-\d\d \d\d:\d\d:\d\d[+-]\d\+\>/\=DT2TS(submatch(0))/g
 "}}}
 
 " Autocmds {{{
