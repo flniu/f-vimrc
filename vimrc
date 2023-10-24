@@ -1,6 +1,6 @@
 " My vimrc for Mac/Linux/Windows * GUI/Console * Vim/Neovim
 " Author: Francis Niu (https://github.com/flniu)
-" Updated At: 2023-08-24
+" Updated At: 2023-10-24
 
 " Global variables {{{
 let g:is_nvim = has('nvim')
@@ -303,16 +303,7 @@ command! -range=% FormatJSON set ft=json | <line1>,<line2>!python3 -m json.tool 
 command! -range=% FormatJSONSortKeys set ft=json | <line1>,<line2>!python3 -m json.tool --no-ensure-ascii --sort-keys
 command! -range=% FormatJSONCompact set ft=json | <line1>,<line2>!python3 -m json.tool --no-ensure-ascii --compact
 command! -range=% FixKunlunUnicode <line1>,<line2>s/"\(\\u[^"]\+\)"/\1/ge
-command! Data2JSON call Data2JSON()
-function! Data2JSON()"{{{
-  v/^{"data"/d
-  s/%$//
-  FormatJSONSortKeys
-  v/^    "data": /d
-  s/^    "data": \|,$//g
-  String2JSON
-  FT json
-endfunction"}}}
+command! ParseBaseAutomationPayload %!python3 $HOME/code/base-flow-definition/parse.py -o -
 command! -range=% FormatPython <line1>,<line2>!black -
 command! -range=% Alembic2Dot <line1>,<line2>s/ (\(head\|branchpoint\|mergepoint\))//ge | <line1>,<line2>s#^\(\x\+\) -> \(\x\+\),#"\1" -> "\2"; //#e | <line1>,<line2>s#^\(\x\+\), \(\x\+\) -> \(\x\+\),#{ "\1" "\2" } -> "\3"; //#e
 function! TS2DT(input) "{{{
@@ -357,6 +348,7 @@ au FileType snippets set noet ts=4 sw=4 fdm=indent noml
 au FileType yaml set et ts=2 sw=2
 au FileType toml set et ts=2 sw=2
 au FileType markdown set wrap foldlevel=1
+au FileType plantuml set ts=2 sw=2 fdm=indent
 au BufNewFile,BufRead *.sgf set filetype=sgf
 au BufNewFile,BufRead *.cue set filetype=cue et ts=2 sw=2
 au BufNewFile,BufRead *.{cmd,bat} set et ts=2 sw=2
