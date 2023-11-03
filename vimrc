@@ -1,6 +1,6 @@
 " My vimrc for Mac/Linux/Windows * GUI/Console * Vim/Neovim
 " Author: Francis Niu (https://github.com/flniu)
-" Updated At: 2023-10-24
+" Updated At: 2023-11-03
 
 " Global variables {{{
 let g:is_nvim = has('nvim')
@@ -298,7 +298,7 @@ function! WriteTempFile(...) "{{{
   endif
 endfunction "}}}
 command! -range=% JSON2String <line1>,<line2>join | <line1>s/\\/\\\\/ge | <line1>s/"/\\"/g | <line1>s/^/"/ | <line1>s/$/"/
-command! -range=% String2JSON <line1>,<line2>join | <line1>s/^"//e | <line1>s/",\=$//e | <line1>s/\\\\/\\/ge | <line1>s/\\"/"/ge | <line1>FormatJSON
+command! -range=% String2JSON <line1>,<line2>join | <line1>s/^\s*"//e | <line1>s/",\=$//e | <line1>s/\\\\/\\/ge | <line1>s/\\"/"/ge | <line1>FormatJSON
 command! -range=% FormatJSON set ft=json | <line1>,<line2>!python3 -m json.tool --no-ensure-ascii
 command! -range=% FormatJSONSortKeys set ft=json | <line1>,<line2>!python3 -m json.tool --no-ensure-ascii --sort-keys
 command! -range=% FormatJSONCompact set ft=json | <line1>,<line2>!python3 -m json.tool --no-ensure-ascii --compact
