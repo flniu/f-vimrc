@@ -1,6 +1,6 @@
 " My vimrc for Mac/Linux/Windows * GUI/Console * Vim/Neovim
 " Author: Francis Niu (https://github.com/flniu)
-" Updated At: 2023-11-03
+" Updated At: 2024-04-10
 
 " Global variables {{{
 let g:is_nvim = has('nvim')
@@ -38,9 +38,9 @@ endif
 
 " General settings {{{
 set nocompatible
-try
+if filereadable($MYVIMRC_PLUGIN)
   source $MYVIMRC_PLUGIN
-endtry
+endif
 filetype plugin indent on
 syntax on
 if has('mouse')
@@ -111,7 +111,9 @@ if !g:is_nvim
   "set nowritebackup
   "set autoread
   set autowrite
-  set viminfofile=$VIMFILES/.viminfo
+  if exists('+viminfofile')
+    set viminfofile=$VIMFILES/.viminfo
+  endif
   if has('persistent_undo')
     let $VIMUNDODIR = $VIMFILES . '/.undodir'
     if !isdirectory($VIMUNDODIR) && exists('*mkdir')
@@ -297,13 +299,16 @@ function! WriteTempFile(...) "{{{
     exe 'edit ' . new_filename
   endif
 endfunction "}}}
-command! -range=% JSON2String <line1>,<line2>join | <line1>s/\\/\\\\/ge | <line1>s/"/\\"/g | <line1>s/^/"/ | <line1>s/$/"/
+command! -range=% JSON2String <line1>,<line2>FormatJSONCompact | <line1>s/\\/\\\\/ge | <line1>s/"/\\"/g | <line1>s/^/"/ | <line1>s/$/"/
 command! -range=% String2JSON <line1>,<line2>join | <line1>s/^\s*"//e | <line1>s/",\=$//e | <line1>s/\\\\/\\/ge | <line1>s/\\"/"/ge | <line1>FormatJSON
+command! -range=% String2JSONSortKeys <line1>,<line2>join | <line1>s/^\s*"//e | <line1>s/",\=$//e | <line1>s/\\\\/\\/ge | <line1>s/\\"/"/ge | <line1>FormatJSONSortKeys
 command! -range=% FormatJSON set ft=json | <line1>,<line2>!python3 -m json.tool --no-ensure-ascii
 command! -range=% FormatJSONSortKeys set ft=json | <line1>,<line2>!python3 -m json.tool --no-ensure-ascii --sort-keys
-command! -range=% FormatJSONCompact set ft=json | <line1>,<line2>!python3 -m json.tool --no-ensure-ascii --compact
+command! -range=% -bar FormatJSONCompact set ft=json | <line1>,<line2>!python3 -m json.tool --no-ensure-ascii --compact
 command! -range=% FixKunlunUnicode <line1>,<line2>s/"\(\\u[^"]\+\)"/\1/ge
-command! ParseBaseAutomationPayload %!python3 $HOME/code/base-flow-definition/parse.py -o -
+command! -range=% B64Decode <line1>,<line2>!python3 $HOME/test/python-demo/b64decode.py
+command! -range=% B64Ungzip <line1>,<line2>!python3 $HOME/test/python-demo/b64ungzip.py
+command! ParseBaseAutomationPayload set ft=json | %!python3 $HOME/code/base-flow-definition/parse.py -o -
 command! -range=% FormatPython <line1>,<line2>!black -
 command! -range=% Alembic2Dot <line1>,<line2>s/ (\(head\|branchpoint\|mergepoint\))//ge | <line1>,<line2>s#^\(\x\+\) -> \(\x\+\),#"\1" -> "\2"; //#e | <line1>,<line2>s#^\(\x\+\), \(\x\+\) -> \(\x\+\),#{ "\1" "\2" } -> "\3"; //#e
 function! TS2DT(input) "{{{
