@@ -39,7 +39,7 @@ Plug 'flniu/CmdlineComplete'
 " GitGutter, shows a git diff in the gutter
 Plug 'airblade/vim-gitgutter'
 " fzf
-"Plug 'junegunn/fzf'
+Plug 'junegunn/fzf'
 "}}}
 
 " Editing {{{

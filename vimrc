@@ -1,6 +1,6 @@
 " My vimrc for Mac/Linux/Windows * GUI/Console * Vim/Neovim
 " Author: Francis Niu (https://github.com/flniu)
-" Updated At: 2024-04-10
+" Updated At: 2024-08-21
 
 " Global variables {{{
 let g:is_nvim = has('nvim')
@@ -299,15 +299,18 @@ function! WriteTempFile(...) "{{{
     exe 'edit ' . new_filename
   endif
 endfunction "}}}
+command! -range=% PrintString <line1>,<line2>!python3 -c 'print(input())'
 command! -range=% JSON2String <line1>,<line2>FormatJSONCompact | <line1>s/\\/\\\\/ge | <line1>s/"/\\"/g | <line1>s/^/"/ | <line1>s/$/"/
 command! -range=% String2JSON <line1>,<line2>join | <line1>s/^\s*"//e | <line1>s/",\=$//e | <line1>s/\\\\/\\/ge | <line1>s/\\"/"/ge | <line1>FormatJSON
 command! -range=% String2JSONSortKeys <line1>,<line2>join | <line1>s/^\s*"//e | <line1>s/",\=$//e | <line1>s/\\\\/\\/ge | <line1>s/\\"/"/ge | <line1>FormatJSONSortKeys
+command! -range=% String2JSONCompact <line1>,<line2>join | <line1>s/^\s*"//e | <line1>s/",\=$//e | <line1>s/\\\\/\\/ge | <line1>s/\\"/"/ge | <line1>FormatJSONCompact
 command! -range=% FormatJSON set ft=json | <line1>,<line2>!python3 -m json.tool --no-ensure-ascii
 command! -range=% FormatJSONSortKeys set ft=json | <line1>,<line2>!python3 -m json.tool --no-ensure-ascii --sort-keys
 command! -range=% -bar FormatJSONCompact set ft=json | <line1>,<line2>!python3 -m json.tool --no-ensure-ascii --compact
 command! -range=% FixKunlunUnicode <line1>,<line2>s/"\(\\u[^"]\+\)"/\1/ge
 command! -range=% B64Decode <line1>,<line2>!python3 $HOME/test/python-demo/b64decode.py
 command! -range=% B64Ungzip <line1>,<line2>!python3 $HOME/test/python-demo/b64ungzip.py
+command! -range=% ZSTDDecode <line1>,<line2>!$HOME/test/python-demo/venv/bin/python $HOME/test/python-demo/zstddecode.py
 command! ParseBaseAutomationPayload set ft=json | %!python3 $HOME/code/base-flow-definition/parse.py -o -
 command! -range=% FormatPython <line1>,<line2>!black -
 command! -range=% Alembic2Dot <line1>,<line2>s/ (\(head\|branchpoint\|mergepoint\))//ge | <line1>,<line2>s#^\(\x\+\) -> \(\x\+\),#"\1" -> "\2"; //#e | <line1>,<line2>s#^\(\x\+\), \(\x\+\) -> \(\x\+\),#{ "\1" "\2" } -> "\3"; //#e
