@@ -1,6 +1,6 @@
 " My vimrc for Mac/Linux/Windows * GUI/Console * Vim/Neovim
 " Author: Francis Niu (https://github.com/flniu)
-" Updated At: 2024-08-21
+" Updated At: 2026-04-29
 
 " Global variables {{{
 let g:is_nvim = has('nvim')
@@ -65,7 +65,7 @@ set showmatch
 set wildmenu
 set wildignore+=*/.git/*,*/.hg/*,*/.svn/*
 set nrformats-=octal
-"set iskeyword+=-
+set iskeyword+=-
 "}}}
 
 " Layout & indent {{{
@@ -299,7 +299,6 @@ function! WriteTempFile(...) "{{{
     exe 'edit ' . new_filename
   endif
 endfunction "}}}
-command! -range=% PrintString <line1>,<line2>!python3 -c 'print(input())'
 command! -range=% JSON2String <line1>,<line2>FormatJSONCompact | <line1>s/\\/\\\\/ge | <line1>s/"/\\"/g | <line1>s/^/"/ | <line1>s/$/"/
 command! -range=% String2JSON <line1>,<line2>join | <line1>s/^\s*"//e | <line1>s/",\=$//e | <line1>s/\\\\/\\/ge | <line1>s/\\"/"/ge | <line1>FormatJSON
 command! -range=% String2JSONSortKeys <line1>,<line2>join | <line1>s/^\s*"//e | <line1>s/",\=$//e | <line1>s/\\\\/\\/ge | <line1>s/\\"/"/ge | <line1>FormatJSONSortKeys
@@ -310,7 +309,9 @@ command! -range=% -bar FormatJSONCompact set ft=json | <line1>,<line2>!python3 -
 command! -range=% FixKunlunUnicode <line1>,<line2>s/"\(\\u[^"]\+\)"/\1/ge
 command! -range=% B64Decode <line1>,<line2>!python3 $HOME/test/python-demo/b64decode.py
 command! -range=% B64Ungzip <line1>,<line2>!python3 $HOME/test/python-demo/b64ungzip.py
+command! -range=% GZIPDecode <line1>,<line2>!$HOME/test/python-demo/venv/bin/python $HOME/test/python-demo/gzipdecode.py
 command! -range=% ZSTDDecode <line1>,<line2>!$HOME/test/python-demo/venv/bin/python $HOME/test/python-demo/zstddecode.py
+command! -range=% AESDecrypt <line1>,<line2>!$HOME/test/go-demo/aes_decrypt/aes_decrypt
 command! ParseBaseAutomationPayload set ft=json | %!python3 $HOME/code/base-flow-definition/parse.py -o -
 command! -range=% FormatPython <line1>,<line2>!black -
 command! -range=% Alembic2Dot <line1>,<line2>s/ (\(head\|branchpoint\|mergepoint\))//ge | <line1>,<line2>s#^\(\x\+\) -> \(\x\+\),#"\1" -> "\2"; //#e | <line1>,<line2>s#^\(\x\+\), \(\x\+\) -> \(\x\+\),#{ "\1" "\2" } -> "\3"; //#e
@@ -355,7 +356,7 @@ au FileType css,scss,javascript set foldmethod=marker foldmarker={,}
 au FileType snippets set noet ts=4 sw=4 fdm=indent noml
 au FileType yaml set et ts=2 sw=2
 au FileType toml set et ts=2 sw=2
-au FileType markdown set wrap foldlevel=1
+au FileType markdown set wrap foldlevel=1 ts=2 sw=2
 au FileType plantuml set ts=2 sw=2 fdm=indent
 au BufNewFile,BufRead *.sgf set filetype=sgf
 au BufNewFile,BufRead *.cue set filetype=cue et ts=2 sw=2
