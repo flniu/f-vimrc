@@ -1,6 +1,6 @@
 " My vimrc for Mac/Linux/Windows * GUI/Console * Vim/Neovim
 " Author: Francis Niu (https://github.com/flniu)
-" Updated At: 2026-04-29
+" Updated At: 2026-06-01
 
 " Global variables {{{
 let g:is_nvim = has('nvim')
@@ -271,6 +271,15 @@ vmap <silent> // y/<C-R>=substitute(escape(@",'\\/.*^$~[]'),'\n','\\n','g')<CR><
 nmap <Leader>cf /<<<<\+\\|====\+\\|>>>>\+<CR>
 " Save with sudo
 cmap w!! w !sudo tee >/dev/null %
+" Toggle OK
+function ToggleChecklistItem()
+  if match(getline('.'), ' OK$') == -1
+    s/$/ OK/
+  else
+    s/ OK$//
+  endif
+endfunction
+nmap <Leader><Space> :call ToggleChecklistItem()<CR>
 "}}}
 
 " Commands {{{

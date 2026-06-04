@@ -65,9 +65,9 @@ Plug 'terryma/vim-expand-region'
 " Syntax and settings for plain text
 Plug 'flniu/txt.vim'
 " Markdown Vim Mode
-"Plug 'flniu/vim-markdown'
-"let g:vim_markdown_toc_autofit = 1
-"let g:vim_markdown_frontmatter = 1
+Plug 'flniu/vim-markdown'
+let g:vim_markdown_toc_autofit = 1
+let g:vim_markdown_frontmatter = 1
 "}}}
 
 " Web development {{{
@@ -121,6 +121,7 @@ if exists(':NERDTreeToggle') == 2
   nmap <F9> :NERDTreeToggle<CR>
   let NERDTreeIgnore = ['\.pyc$']
 endif
+autocmd BufWritePost * if exists(':NERDTreeRefreshRoot') == 2 | NERDTreeRefreshRoot | endif
 " Tagbar
 if exists(':TagbarToggle') == 2
   nmap <F12> :TagbarToggle<CR>
